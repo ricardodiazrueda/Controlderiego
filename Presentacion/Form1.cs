@@ -8,9 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Comunicacion;
+using Comunication;
 
-namespace Presentacion
+namespace Presentation
 {
     public partial class Form1 : Form
     {
@@ -37,6 +37,11 @@ namespace Presentacion
                 txtTerminal.Clear();
                 e.Handled = true;
             }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

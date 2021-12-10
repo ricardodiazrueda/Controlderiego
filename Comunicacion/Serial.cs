@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO.Ports;
 
-namespace Comunicacion
+namespace Comunication
 {
     public delegate void SerialCallback(string data);
     public class Serial
