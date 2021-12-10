@@ -15,5 +15,9 @@ namespace Business
         {
             return userData.Insert(user);
         }
+        public UserEntity Login(string username, string password)
+        {
+            return userData.Read(username, password);
+        }
     }
 }

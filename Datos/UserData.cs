@@ -35,5 +35,39 @@ namespace Data
                 database.Disconnect();
             }
         }
+        public UserEntity Read(string username, string password)
+        {
+            try
+            {
+                password = Util.Util.Hash(password);
+
+                string query = "SELECT * FROM Users WHERE UserName = '{0}' AND Password = '{1}'";
+                query = string.Format(query, username, password);
+
+                SQLiteConnection connection = database.Connect();
+                SQLiteCommand command = new SQLiteCommand(query, connection);
+                SQLiteDataReader reader = command.ExecuteReader();
+
+                UserEntity user = null;
+                if (reader.Read())
+                {
+                    user = new UserEntity();
+                    user.UserID = Convert.ToInt32(reader["UserID"]);
+                    user.UserName = Convert.ToString(reader["UserName"]);
+                    user.Password = Convert.ToString(reader["Password"]);
+                    user.FullName = Convert.ToString(reader["FullName"]);
+                }
+
+                return user;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+            finally
+            {
+                database.Disconnect();
+            }
+        }
     }
 }
