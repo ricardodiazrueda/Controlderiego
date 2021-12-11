@@ -16,11 +16,11 @@ namespace Presentation
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-           
+
             frmLogin frm = new frmLogin();
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                (new frmCreateUser()).ShowDialog();
+                Application.Run(new frmCreateUser());
             }
         }
     }
