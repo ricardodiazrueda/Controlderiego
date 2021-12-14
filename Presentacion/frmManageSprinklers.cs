@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Business;
+using Comunication;
 
 namespace Presentation
 {
@@ -34,6 +35,7 @@ namespace Presentation
             for (int i = 0; i < sprinklers; i++)
             {
                 int state = states[prevSprinklers + i];
+                int id = prevSprinklers + i + 1;
 
                 Button button = new Button();
                 this.SuspendLayout();
@@ -48,10 +50,22 @@ namespace Presentation
                 button.Click += (sender, e) =>
                 {
                     Button btn = sender as Button;
+
                     int on = (prevSprinklers + (int)btn.Tag) * 2 - 1;
                     int off = (prevSprinklers + (int)btn.Tag) * 2;
-                    MessageBox.Show(on.ToString());
-                    MessageBox.Show(off.ToString());
+
+                    if (btn.BackColor == Color.Green)
+                    {
+                        sprinklerBusiness.SetState(id, 0);
+                        btn.BackColor = Color.Red;
+                        Serial.Send(off.ToString());
+                    }
+                    else
+                    {
+                        sprinklerBusiness.SetState(id, 1);
+                        btn.BackColor = Color.Green;
+                        Serial.Send(on.ToString());
+                    }
                 };
                 this.Controls.Add(button);
                 this.ResumeLayout(false);

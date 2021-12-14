@@ -58,8 +58,11 @@ namespace Comunication
         {
             try
             {
+                Console.WriteLine("Sending: " + data);
+                if (serialPort == null)
+                    throw new Exception("Serial not initialized");
                 serialPort.WriteLine(data);
-                Console.WriteLine(data);
+                Console.WriteLine("Sent: " + data);
             }
             catch (Exception ex)
             {
@@ -71,7 +74,7 @@ namespace Comunication
             try
             {
                 string data = serialPort.ReadLine();
-                Console.WriteLine(data);
+                Console.WriteLine("Received: " + data);
                 callback(data);
             }
             catch(Exception ex)

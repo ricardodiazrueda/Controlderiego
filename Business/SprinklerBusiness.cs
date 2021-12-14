@@ -19,5 +19,9 @@ namespace Business
 
             return sprinklerData.ReadAll();
         }
+        public bool SetState(int sprinkler, int state)
+        {
+            return sprinklerData.SetState(sprinkler, state);
+        }
     }
 }

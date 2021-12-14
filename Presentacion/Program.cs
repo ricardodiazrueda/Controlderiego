@@ -21,20 +21,18 @@ namespace Presentation
 
             if (dataBusiness.Read("Sprinklers") == "0")
             {
-                Application.Run(new frmCreateSprinkler());
+                new frmCreateSprinkler().ShowDialog();
+                new frmCreateUser().ShowDialog();
             }
             else
             {
-                (new frmSetSerialPort()).ShowDialog();
-                Application.Run(new frmMenu());
+                frmLogin frm = new frmLogin();
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    //new frmSetSerialPort().ShowDialog();
+                    new frmMenu().ShowDialog();
+                }
             }
-            /*
-            frmLogin frm = new frmLogin();
-            if (frm.ShowDialog() == DialogResult.OK)
-            {
-                Application.Run(new frmCreateSprinkler());
-            }
-            */
         }
     }
 }

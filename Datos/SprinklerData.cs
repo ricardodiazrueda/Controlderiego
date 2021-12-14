@@ -65,5 +65,59 @@ namespace Data
                 return null;
             }
         }
+        public bool SetState(int sprinkler, int state)
+        {
+            try
+            {
+                using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+                {
+                    connection.Open();
+                    using (SQLiteCommand command = new SQLiteCommand(connection))
+                    {
+                        string query = "UPDATE Sprinklers SET State = {1} WHERE SprinklerID = {0}";
+                        query = string.Format(query, sprinkler, state);
+
+                        command.CommandText = query;
+                        command.ExecuteNonQuery();
+                    }
+                    connection.Close();
+                }
+
+                try
+                {
+                    bool result = false;
+
+                    using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+                    {
+                        connection.Open();
+                        using (SQLiteCommand command = new SQLiteCommand(connection))
+                        {
+                            string query = "SELECT * FROM Sprinklers WHERE SprinklerID = {0} AND State = {1}";
+                            query = string.Format(query, sprinkler, state);
+
+                            command.CommandText = query;
+                            using (SQLiteDataReader reader = command.ExecuteReader())
+                            {
+                                if (reader.Read())
+                                {
+                                    result = true;
+                                }
+                            }
+                        }
+                        connection.Close();
+                    }
+
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
     }
 }
