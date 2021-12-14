@@ -1,6 +1,6 @@
 ﻿namespace Presentation
 {
-    partial class Form1
+    partial class frmSetSerialPort
     {
         /// <summary>
         /// Variable del diseñador necesaria.
@@ -47,6 +47,7 @@
             // 
             // btnDisconnect
             // 
+            this.btnDisconnect.Enabled = false;
             this.btnDisconnect.Location = new System.Drawing.Point(182, 55);
             this.btnDisconnect.Margin = new System.Windows.Forms.Padding(4);
             this.btnDisconnect.Name = "btnDisconnect";
@@ -54,6 +55,7 @@
             this.btnDisconnect.TabIndex = 1;
             this.btnDisconnect.Text = "Desconectar";
             this.btnDisconnect.UseVisualStyleBackColor = true;
+            this.btnDisconnect.Click += new System.EventHandler(this.btnDisconnect_Click);
             // 
             // cbxPorts
             // 
@@ -66,13 +68,14 @@
             // 
             // txtTerminal
             // 
+            this.txtTerminal.Enabled = false;
             this.txtTerminal.Location = new System.Drawing.Point(13, 95);
             this.txtTerminal.Name = "txtTerminal";
             this.txtTerminal.Size = new System.Drawing.Size(330, 32);
             this.txtTerminal.TabIndex = 3;
             this.txtTerminal.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtTerminal_KeyDown);
             // 
-            // Form1
+            // frmSetSerialPort
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -82,11 +85,11 @@
             this.Controls.Add(this.btnDisconnect);
             this.Controls.Add(this.btnConnect);
             this.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "Form1";
+            this.Name = "frmSetSerialPort";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

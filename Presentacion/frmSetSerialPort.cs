@@ -12,36 +12,41 @@ using Comunication;
 
 namespace Presentation
 {
-    public partial class Form1 : Form
+    public partial class frmSetSerialPort : Form
     {
-        Serial serial;
-        public Form1()
+        public frmSetSerialPort()
         {
-            serial = new Serial();
-
             InitializeComponent();
-            cbxPorts.Items.AddRange(serial.GetPorts());
+            string[] ports = Serial.GetPorts();
+            cbxPorts.Items.AddRange(ports);
         }
 
         private void btnConnect_Click(object sender, EventArgs e)
         {
-            string result = serial.Open(cbxPorts.Text);
-            MessageBox.Show(result);
+            if (Serial.Open(cbxPorts.Text))
+            {
+                txtTerminal.Enabled = true;
+                btnDisconnect.Enabled = true;
+            }
+        }
+        private void btnDisconnect_Click(object sender, EventArgs e)
+        {
+            if(Serial.Close())
+            {
+                txtTerminal.Enabled = false;
+                btnDisconnect.Enabled = false;
+            }
         }
 
         private void txtTerminal_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                serial.Send(txtTerminal.Text);
+                Serial.Send(txtTerminal.Text);
                 txtTerminal.Clear();
                 e.Handled = true;
             }
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

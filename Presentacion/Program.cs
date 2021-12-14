@@ -25,6 +25,7 @@ namespace Presentation
             }
             else
             {
+                (new frmSetSerialPort()).ShowDialog();
                 Application.Run(new frmMenu());
             }
             /*
