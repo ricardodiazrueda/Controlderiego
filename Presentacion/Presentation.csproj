@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{23DB4BAD-568E-44F4-957E-AE379AB1D6A6}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <RootNamespace>Presentation</RootNamespace>
     <AssemblyName>Presentation</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -52,6 +55,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmCreateSprinkler.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCreateSprinkler.Designer.cs">
+      <DependentUpon>frmCreateSprinkler.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmCreateUser.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -64,6 +73,12 @@
     <Compile Include="frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmManageSprinklers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmManageSprinklers.Designer.cs">
+      <DependentUpon>frmManageSprinklers.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmMenu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -75,11 +90,17 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmCreateSprinkler.resx">
+      <DependentUpon>frmCreateSprinkler.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmCreateUser.resx">
       <DependentUpon>frmCreateUser.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmManageSprinklers.resx">
+      <DependentUpon>frmManageSprinklers.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMenu.resx">
       <DependentUpon>frmMenu.cs</DependentUpon>
@@ -120,6 +141,12 @@
       <Project>{c06b5c03-e1bb-48f6-b720-752390daedcd}</Project>
       <Name>Entities</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sprinkler.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\radio.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

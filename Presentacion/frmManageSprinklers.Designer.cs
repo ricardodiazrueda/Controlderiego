@@ -1,6 +1,6 @@
 ﻿namespace Presentation
 {
-    partial class frmMenu
+    partial class frmManageSprinklers
     {
         /// <summary>
         /// Required designer variable.
@@ -34,15 +34,15 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::Presentation.Properties.Resources.radio;
-            this.pictureBox1.Location = new System.Drawing.Point(370, 341);
+            this.pictureBox1.Image = global::Presentation.Properties.Resources.sprinkler;
+            this.pictureBox1.Location = new System.Drawing.Point(12, 243);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox1.Size = new System.Drawing.Size(458, 198);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // frmMenu
+            // frmManageSprinklers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -53,9 +53,9 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "frmMenu";
+            this.Name = "frmManageSprinklers";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Selecciona una Radio";
+            this.Text = "frmManageSprinklers";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
