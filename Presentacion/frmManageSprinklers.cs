@@ -16,6 +16,9 @@ namespace Presentation
     {
         List<Button> buttons = new List<Button>();
 
+        Button pressed = null;
+        int action = -1;
+
         RadioBusiness radioBusiness = new RadioBusiness();
         SprinklerBusiness sprinklerBusiness = new SprinklerBusiness();
         int radio = 0;
@@ -56,9 +59,6 @@ namespace Presentation
                         sprinklerBusiness.SetState(i_id, 0);
                         button.BackColor = Color.Red;
                     }
-
-                    foreach (Button btn in buttons)
-                        btn.Enabled = true;
                 }
             };
         }
@@ -83,7 +83,11 @@ namespace Presentation
                 button.Tag = i + 1;
                 button.Click += (sender, e) =>
                 {
+                    if (buttons.Exists(x => x.BackColor == Color.Blue))
+                        return;
+
                     Button btn = sender as Button;
+                    pressed = btn;
 
                     int on = (prevSprinklers + (int)btn.Tag) * 2 - 1;
                     int off = (prevSprinklers + (int)btn.Tag) * 2;
@@ -92,19 +96,41 @@ namespace Presentation
                     {
                         btn.BackColor = Color.Blue;
                         Serial.Send(off.ToString());
+                        action = 0;
                     }
                     else
                     {
                         btn.BackColor = Color.Blue;
                         Serial.Send(on.ToString());
+                        action = 1;
                     }
 
-                    foreach (Button btn1 in buttons)
-                        btn1.Enabled = false;
+                    clock.Enabled = true;
+                    foreach (Button button1 in buttons)
+                        button1.Enabled = false;
                 };
+                buttons.Add(button);
                 this.Controls.Add(button);
                 this.ResumeLayout(false);
             }
+        }
+
+        private void clock_Tick(object sender, EventArgs e)
+        {
+            if (pressed != null)
+            {
+                if (pressed.BackColor == Color.Blue)
+                {
+                    if (action == 0)
+                        pressed.BackColor = Color.Green;
+                    else
+                        pressed.BackColor = Color.Red;
+                }
+            }
+
+            clock.Enabled = false;
+            foreach (Button button1 in buttons)
+                button1.Enabled = true;
         }
     }
 }
