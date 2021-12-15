@@ -11,7 +11,7 @@ namespace Comunication
     public static class Serial
     {
         static SerialPort serialPort = null;
-        static SerialCallback callback { get; set; } = (data) => { };
+        public static SerialCallback callback { get; set; } = (data) => { };
         public static bool Open(string portName)
         {
             try

@@ -14,6 +14,8 @@ namespace Presentation
 {
     public partial class frmManageSprinklers : Form
     {
+        List<Button> buttons = new List<Button>();
+
         RadioBusiness radioBusiness = new RadioBusiness();
         SprinklerBusiness sprinklerBusiness = new SprinklerBusiness();
         int radio = 0;
@@ -27,6 +29,38 @@ namespace Presentation
             prevSprinklers = radioBusiness.PrevQuantity(radio);
             this.Text = "Radio " + radio;
             CreateButtons();
+
+            Serial.callback = (data) =>
+            {
+                if (data.Contains(".D"))
+                {
+                    // data = "ME0301OON.D";
+                    string s_radio = data.Substring(2, 2);
+                    string s_sprinkler = data.Substring(4, 2);
+                    string s_action = data.Substring(6, 3);
+
+                    int i_radio = Convert.ToInt32(s_radio);
+                    int i_sprinkler = Convert.ToInt32(s_sprinkler);
+
+                    int i_id = radioBusiness.PrevQuantity(i_radio) + i_sprinkler;
+
+                    Button button = buttons.Find( x => (int)x.Tag == i_sprinkler);
+
+                    if (s_action == "OON")
+                    {
+                        sprinklerBusiness.SetState(i_id, 1);
+                        button.BackColor = Color.Green;
+                    }
+                    else
+                    {
+                        sprinklerBusiness.SetState(i_id, 0);
+                        button.BackColor = Color.Red;
+                    }
+
+                    foreach (Button btn in buttons)
+                        btn.Enabled = true;
+                }
+            };
         }
         void CreateButtons()
         {
@@ -56,16 +90,17 @@ namespace Presentation
 
                     if (btn.BackColor == Color.Green)
                     {
-                        sprinklerBusiness.SetState(id, 0);
-                        btn.BackColor = Color.Red;
+                        btn.BackColor = Color.Blue;
                         Serial.Send(off.ToString());
                     }
                     else
                     {
-                        sprinklerBusiness.SetState(id, 1);
-                        btn.BackColor = Color.Green;
+                        btn.BackColor = Color.Blue;
                         Serial.Send(on.ToString());
                     }
+
+                    foreach (Button btn1 in buttons)
+                        btn1.Enabled = false;
                 };
                 this.Controls.Add(button);
                 this.ResumeLayout(false);
