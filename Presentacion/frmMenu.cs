@@ -42,5 +42,10 @@ namespace Presentation
                 this.ResumeLayout(false);
             }
         }
+
+        private void btnProgram_Click(object sender, EventArgs e)
+        {
+            new frmProgram().ShowDialog();
+        }
     }
 }

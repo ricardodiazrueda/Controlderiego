@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.btnProgram = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -42,11 +43,22 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
+            // btnProgram
+            // 
+            this.btnProgram.Location = new System.Drawing.Point(12, 457);
+            this.btnProgram.Name = "btnProgram";
+            this.btnProgram.Size = new System.Drawing.Size(458, 43);
+            this.btnProgram.TabIndex = 1;
+            this.btnProgram.Text = "Programar";
+            this.btnProgram.UseVisualStyleBackColor = true;
+            this.btnProgram.Click += new System.EventHandler(this.btnProgram_Click);
+            // 
             // frmMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(482, 453);
+            this.ClientSize = new System.Drawing.Size(482, 512);
+            this.Controls.Add(this.btnProgram);
             this.Controls.Add(this.pictureBox1);
             this.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -64,5 +76,6 @@
         #endregion
 
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button btnProgram;
     }
 }

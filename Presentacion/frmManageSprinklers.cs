@@ -51,13 +51,13 @@ namespace Presentation
 
                     if (s_action == "OON")
                     {
-                        sprinklerBusiness.SetState(i_id, 1);
                         button.BackColor = Color.Green;
+                        sprinklerBusiness.SetState(i_id, 1);
                     }
                     else
                     {
-                        sprinklerBusiness.SetState(i_id, 0);
                         button.BackColor = Color.Red;
+                        sprinklerBusiness.SetState(i_id, 0);
                     }
                 }
             };

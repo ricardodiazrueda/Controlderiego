@@ -46,7 +46,7 @@
             // 
             // clock
             // 
-            this.clock.Interval = 5000;
+            this.clock.Interval = 10000;
             this.clock.Tick += new System.EventHandler(this.clock_Tick);
             // 
             // frmManageSprinklers

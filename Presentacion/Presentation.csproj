@@ -49,6 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmProgram.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmProgram.Designer.cs">
+      <DependentUpon>frmProgram.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmSetSerialPort.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -87,6 +93,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmProgram.resx">
+      <DependentUpon>frmProgram.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmSetSerialPort.resx">
       <DependentUpon>frmSetSerialPort.cs</DependentUpon>
     </EmbeddedResource>
