@@ -12,9 +12,12 @@ namespace Entities
         public int SprinklerID { get; set; }
         public string ActionTime { get; set; }
         public int Action { get; set; }
+        public bool Finish { get; set; }
+        public ProgramEntity previus { get; set; }  
         public override string ToString()
         {
-            return ActionTime + " - " + (Action == 1 ? "Encender" : "Apagar");
+
+            return SprinklerID + " - " + ActionTime + " - " + (Action == 1 ? "Encender" : "Apagar");
         }
     }
 }

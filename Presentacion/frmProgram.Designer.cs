@@ -43,6 +43,9 @@
             this.dtpTime = new System.Windows.Forms.DateTimePicker();
             this.clock = new System.Windows.Forms.Timer(this.components);
             this.lblProgramados = new System.Windows.Forms.Label();
+            this.lbxAlerts = new System.Windows.Forms.ListBox();
+            this.lblExecuting = new System.Windows.Forms.Label();
+            this.lblLate = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -188,11 +191,41 @@
             this.lblProgramados.TabIndex = 11;
             this.lblProgramados.Text = "Monitoreando: 0 ";
             // 
+            // lbxAlerts
+            // 
+            this.lbxAlerts.FormattingEnabled = true;
+            this.lbxAlerts.ItemHeight = 23;
+            this.lbxAlerts.Location = new System.Drawing.Point(12, 515);
+            this.lbxAlerts.Name = "lbxAlerts";
+            this.lbxAlerts.Size = new System.Drawing.Size(523, 96);
+            this.lbxAlerts.TabIndex = 12;
+            // 
+            // lblExecuting
+            // 
+            this.lblExecuting.AutoSize = true;
+            this.lblExecuting.Location = new System.Drawing.Point(12, 466);
+            this.lblExecuting.Name = "lblExecuting";
+            this.lblExecuting.Size = new System.Drawing.Size(156, 23);
+            this.lblExecuting.TabIndex = 13;
+            this.lblExecuting.Text = "En ejecución: 0";
+            // 
+            // lblLate
+            // 
+            this.lblLate.AutoSize = true;
+            this.lblLate.Location = new System.Drawing.Point(12, 489);
+            this.lblLate.Name = "lblLate";
+            this.lblLate.Size = new System.Drawing.Size(87, 23);
+            this.lblLate.TabIndex = 14;
+            this.lblLate.Text = "Tarde: 0";
+            // 
             // frmProgram
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(548, 475);
+            this.ClientSize = new System.Drawing.Size(548, 624);
+            this.Controls.Add(this.lblLate);
+            this.Controls.Add(this.lblExecuting);
+            this.Controls.Add(this.lbxAlerts);
             this.Controls.Add(this.lblProgramados);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnDelete);
@@ -234,5 +267,8 @@
         private System.Windows.Forms.DateTimePicker dtpTime;
         private System.Windows.Forms.Timer clock;
         private System.Windows.Forms.Label lblProgramados;
+        private System.Windows.Forms.ListBox lbxAlerts;
+        private System.Windows.Forms.Label lblExecuting;
+        private System.Windows.Forms.Label lblLate;
     }
 }

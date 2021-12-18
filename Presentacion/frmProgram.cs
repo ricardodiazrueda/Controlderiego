@@ -20,6 +20,9 @@ namespace Presentation
         SprinklerBusiness sprinklerBusiness = new SprinklerBusiness();
         List<ProgramEntity> programList = new List<ProgramEntity>();
         List<ProgramEntity> programs = null;
+        List<ProgramEntity> sent = new List<ProgramEntity>();
+        List<ProgramEntity> late = new List<ProgramEntity>();
+        List<ProgramEntity> fail = new List<ProgramEntity>();
         public frmProgram()
         {
             InitializeComponent();
@@ -44,13 +47,17 @@ namespace Presentation
 
                     int i_id = radioBusiness.PrevQuantity(i_radio) + i_sprinkler;
 
+                    int action = 0;
                     if (s_action == "OON")
+                        action = 1;
+                    
+                    sprinklerBusiness.SetState(i_id, action);
+
+                    List<ProgramEntity> found = sent.FindAll(x => x.SprinklerID == i_id && x.Action == action);
+
+                    foreach (ProgramEntity entity in found)
                     {
-                        sprinklerBusiness.SetState(i_id, 1);
-                    }
-                    else
-                    {
-                        sprinklerBusiness.SetState(i_id, 0);
+                        entity.Finish = true;
                     }
                 }
             };
@@ -97,20 +104,91 @@ namespace Presentation
             List<ProgramEntity> found = programList.FindAll(x => x.ActionTime == time);
             foreach (ProgramEntity program in found)
             {
-                int on = program.SprinklerID * 2 - 1;
-                int off = program.SprinklerID * 2;
-
-                if (program.Action == 1)
+                bool exist = sent.Exists(x => x.ActionTime == program.ActionTime && x.Action == program.Action && x.SprinklerID == program.SprinklerID);
+                if (!exist || (exist && !program.Finish))
                 {
-                    Serial.Send(on.ToString());
+                    if (program.Action == 1)
+                    {
+                        int on = program.SprinklerID * 2 - 1;
+                        Serial.Send(on.ToString());
+                    }
+                    else
+                    {
+                        int off = program.SprinklerID * 2;
+                        Serial.Send(off.ToString());
+                    }
+
+                    if (!exist)
+                    {
+                        program.Finish = false;
+                        sent.Add(program);
+                    }
+                }
+            }
+
+            found = late.FindAll(x => x.ActionTime == time);
+            foreach (ProgramEntity program in found)
+            {
+                bool exist = sent.Exists(x => x.ActionTime == program.ActionTime && x.Action == program.Action && x.SprinklerID == program.SprinklerID);
+                if (!exist || (exist && !program.Finish))
+                {
+                    if (program.Action == 1)
+                    {
+                        int on = program.SprinklerID * 2 - 1;
+                        Serial.Send(on.ToString());
+                    }
+                    else
+                    {
+                        int off = program.SprinklerID * 2;
+                        Serial.Send(off.ToString());
+                    }
+
+                    if (!exist)
+                    {
+                        program.Finish = false;
+                        sent.Add(program);
+                    }
+                }
+            }
+            for (int i = 0; i < sent.Count; i++)
+            {
+                ProgramEntity program = sent[i];
+                if (program.ProgramID != -1)
+                {
+                    if (program.Finish && program.ActionTime != time)
+                    {
+                        sent.Remove(program); i--;
+                    }
+                    else if (!program.Finish && program.ActionTime != time)
+                    {
+                        int min = 10;
+                        string[] t = program.ActionTime.Split(':');
+                        int newHour = (int.Parse(t[0])) + ((int.Parse(t[1]) + min) / 60);
+                        int newMinute = (int.Parse(t[1]) + min) % 60;
+                        string newTime = newHour.ToString().PadLeft(2, '0') + ":" + newMinute.ToString().PadLeft(2, '0');
+                        late.Add(new ProgramEntity() { Action = program.Action, SprinklerID = program.SprinklerID, Finish = false, ActionTime = newTime, ProgramID = -1, previus = program});
+                        sent.Remove(program); i--;
+                    }
                 }
                 else
                 {
-                    Serial.Send(off.ToString());
+                    if (program.Finish)
+                    {
+                        sent.Remove(program); i--;
+                        late.Remove(program);
+                    }
+                    else if (string.Compare(program.ActionTime, time) < 0)
+                    {
+                        sent.Remove(program); i--;
+                        late.Remove(program);
+                        lbxAlerts.Items.Add(program.previus);
+                    }
                 }
             }
 
             lblProgramados.Text = "Monitoreando: " + programList.Count + " actividades a las " + time;
+            lblExecuting.Text = "En ejecucion: " + sent.Count.ToString();
+            lblLate.Text = "Tarde: " + late.Count.ToString();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
