@@ -46,6 +46,7 @@
             this.lbxAlerts = new System.Windows.Forms.ListBox();
             this.lblExecuting = new System.Windows.Forms.Label();
             this.lblLate = new System.Windows.Forms.Label();
+            this.cbxDay = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -53,7 +54,7 @@
             // 
             this.cbxRadios.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxRadios.FormattingEnabled = true;
-            this.cbxRadios.Location = new System.Drawing.Point(13, 40);
+            this.cbxRadios.Location = new System.Drawing.Point(110, 40);
             this.cbxRadios.Margin = new System.Windows.Forms.Padding(4);
             this.cbxRadios.Name = "cbxRadios";
             this.cbxRadios.Size = new System.Drawing.Size(255, 31);
@@ -63,7 +64,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 13);
+            this.label1.Location = new System.Drawing.Point(110, 13);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(71, 23);
@@ -73,7 +74,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(276, 13);
+            this.label2.Location = new System.Drawing.Point(373, 13);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(111, 23);
@@ -84,7 +85,7 @@
             // 
             this.cbxSprinklers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxSprinklers.FormattingEnabled = true;
-            this.cbxSprinklers.Location = new System.Drawing.Point(276, 40);
+            this.cbxSprinklers.Location = new System.Drawing.Point(373, 40);
             this.cbxSprinklers.Margin = new System.Windows.Forms.Padding(4);
             this.cbxSprinklers.Name = "cbxSprinklers";
             this.cbxSprinklers.Size = new System.Drawing.Size(255, 31);
@@ -95,7 +96,7 @@
             // 
             this.lbxPrograms.FormattingEnabled = true;
             this.lbxPrograms.ItemHeight = 23;
-            this.lbxPrograms.Location = new System.Drawing.Point(157, 186);
+            this.lbxPrograms.Location = new System.Drawing.Point(249, 185);
             this.lbxPrograms.Name = "lbxPrograms";
             this.lbxPrograms.Size = new System.Drawing.Size(255, 211);
             this.lbxPrograms.TabIndex = 4;
@@ -103,7 +104,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(156, 160);
+            this.label3.Location = new System.Drawing.Point(248, 159);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(153, 23);
@@ -113,7 +114,7 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(280, 403);
+            this.btnDelete.Location = new System.Drawing.Point(372, 402);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(132, 33);
             this.btnDelete.TabIndex = 6;
@@ -123,7 +124,7 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(388, 28);
+            this.btnAdd.Location = new System.Drawing.Point(553, 28);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(124, 33);
             this.btnAdd.TabIndex = 7;
@@ -138,13 +139,13 @@
             this.rbOn.Name = "rbOn";
             this.rbOn.Size = new System.Drawing.Size(125, 27);
             this.rbOn.TabIndex = 8;
-            this.rbOn.TabStop = true;
             this.rbOn.Text = "Encender";
             this.rbOn.UseVisualStyleBackColor = true;
             // 
             // rbOff
             // 
             this.rbOff.AutoSize = true;
+            this.rbOff.Checked = true;
             this.rbOff.Location = new System.Drawing.Point(144, 31);
             this.rbOff.Name = "rbOff";
             this.rbOff.Size = new System.Drawing.Size(107, 27);
@@ -155,13 +156,14 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cbxDay);
             this.groupBox1.Controls.Add(this.dtpTime);
             this.groupBox1.Controls.Add(this.rbOn);
             this.groupBox1.Controls.Add(this.btnAdd);
             this.groupBox1.Controls.Add(this.rbOff);
             this.groupBox1.Location = new System.Drawing.Point(13, 78);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(518, 74);
+            this.groupBox1.Size = new System.Drawing.Size(683, 74);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Agregar";
@@ -170,7 +172,7 @@
             // 
             this.dtpTime.CustomFormat = "HH:mm";
             this.dtpTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpTime.Location = new System.Drawing.Point(260, 29);
+            this.dtpTime.Location = new System.Drawing.Point(433, 26);
             this.dtpTime.Name = "dtpTime";
             this.dtpTime.ShowUpDown = true;
             this.dtpTime.Size = new System.Drawing.Size(114, 32);
@@ -197,7 +199,7 @@
             this.lbxAlerts.ItemHeight = 23;
             this.lbxAlerts.Location = new System.Drawing.Point(12, 515);
             this.lbxAlerts.Name = "lbxAlerts";
-            this.lbxAlerts.Size = new System.Drawing.Size(523, 96);
+            this.lbxAlerts.Size = new System.Drawing.Size(684, 96);
             this.lbxAlerts.TabIndex = 12;
             // 
             // lblExecuting
@@ -218,11 +220,28 @@
             this.lblLate.TabIndex = 14;
             this.lblLate.Text = "Tarde: 0";
             // 
+            // cbxDay
+            // 
+            this.cbxDay.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxDay.FormattingEnabled = true;
+            this.cbxDay.Items.AddRange(new object[] {
+            "domingo",
+            "lunes",
+            "martes",
+            "miércoles",
+            "jueves",
+            "viernes",
+            "sábado"});
+            this.cbxDay.Location = new System.Drawing.Point(257, 27);
+            this.cbxDay.Name = "cbxDay";
+            this.cbxDay.Size = new System.Drawing.Size(170, 31);
+            this.cbxDay.TabIndex = 15;
+            // 
             // frmProgram
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(548, 624);
+            this.ClientSize = new System.Drawing.Size(708, 624);
             this.Controls.Add(this.lblLate);
             this.Controls.Add(this.lblExecuting);
             this.Controls.Add(this.lbxAlerts);
@@ -270,5 +289,6 @@
         private System.Windows.Forms.ListBox lbxAlerts;
         private System.Windows.Forms.Label lblExecuting;
         private System.Windows.Forms.Label lblLate;
+        private System.Windows.Forms.ComboBox cbxDay;
     }
 }

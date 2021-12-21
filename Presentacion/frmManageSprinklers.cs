@@ -9,24 +9,29 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Business;
 using Comunication;
+using Entities;
+using Data;
 
 namespace Presentation
 {
     public partial class frmManageSprinklers : Form
     {
         List<Button> buttons = new List<Button>();
-
+        LogData logData = new LogData();
+        UserEntity user = null;
         Button pressed = null;
         int action = -1;
 
         RadioBusiness radioBusiness = new RadioBusiness();
         SprinklerBusiness sprinklerBusiness = new SprinklerBusiness();
+
         int radio = 0;
         int sprinklers = 0;
         int prevSprinklers = 0;
-        public frmManageSprinklers(int radio)
+        public frmManageSprinklers(int radio, UserEntity user)
         {
             InitializeComponent();
+            this.user = user;
             this.radio = radio;
             sprinklers = radioBusiness.GetSprinklers(radio);
             prevSprinklers = radioBusiness.PrevQuantity(radio);
@@ -97,12 +102,14 @@ namespace Presentation
                         btn.BackColor = Color.Blue;
                         Serial.Send(off.ToString());
                         action = 0;
+                        logData.Insert(new LogEntity() { Type = "SOLENOIDE OFF", Data = user.FullName + " apagó el solenoide " + (prevSprinklers + (int)btn.Tag), EntityID = user.UserID });
                     }
                     else
                     {
                         btn.BackColor = Color.Blue;
                         Serial.Send(on.ToString());
                         action = 1;
+                        logData.Insert(new LogEntity() { Type = "SOLENOIDE ON", Data = user.FullName + " encendió el solenoide " + (prevSprinklers + (int)btn.Tag), EntityID = user.UserID });
                     }
 
                     clock.Enabled = true;

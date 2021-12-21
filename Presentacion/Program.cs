@@ -26,11 +26,11 @@ namespace Presentation
             }
             else
             {
-                //frmLogin frm = new frmLogin();
-                //if (frm.ShowDialog() == DialogResult.OK)
+                frmLogin frm = new frmLogin();
+                if (frm.ShowDialog() == DialogResult.OK)
                 {
                     //new frmSetSerialPort().ShowDialog();
-                    new frmMenu().ShowDialog();
+                    new frmMenu(frm.user).ShowDialog();
                 }
             }
         }

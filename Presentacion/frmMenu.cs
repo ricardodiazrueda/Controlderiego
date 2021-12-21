@@ -8,16 +8,21 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Business;
+using Entities;
 
 namespace Presentation
 {
     public partial class frmMenu : Form
     {
+        UserEntity user = null;
         RadioBusiness radioBusiness = new RadioBusiness();
-        public frmMenu()
+        public frmMenu(UserEntity user)
         {
             InitializeComponent();
             CreateButtons();
+            this.user = user;
+
+            btnLog.Visible = user.Type == 1;
         }
         void CreateButtons()
         {
@@ -33,7 +38,7 @@ namespace Presentation
                 button.Click += (sender, e) =>
                 {
                     Button btn = (Button)sender;
-                    frmManageSprinklers frm = new frmManageSprinklers((int)btn.Tag);
+                    frmManageSprinklers frm = new frmManageSprinklers((int)btn.Tag, user);
                     this.Visible = false;
                     frm.ShowDialog();
                     this.Visible = true;
@@ -45,7 +50,7 @@ namespace Presentation
 
         private void btnProgram_Click(object sender, EventArgs e)
         {
-            new frmProgram().ShowDialog();
+            new frmProgram(user).ShowDialog();
         }
     }
 }

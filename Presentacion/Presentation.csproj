@@ -146,6 +146,10 @@
       <Project>{25be71fb-c36f-4467-b23e-d956bc6b7e07}</Project>
       <Name>Comunication</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Datos\Data.csproj">
+      <Project>{b107ef27-f3cc-405b-beb5-643626f6ad16}</Project>
+      <Name>Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Entities\Entities.csproj">
       <Project>{c06b5c03-e1bb-48f6-b720-752390daedcd}</Project>
       <Name>Entities</Name>

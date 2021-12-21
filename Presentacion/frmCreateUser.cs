@@ -26,7 +26,8 @@ namespace Presentation
             {
                 FullName = txtFullName.Text,
                 Password = txtPassword.Text,
-                UserName = txtUserName.Text
+                UserName = txtUserName.Text,
+                Type = (cbAdmin.Checked) ? 1 : 0
             };
             string result = userBusiness.Create(user);
             MessageBox.Show(result);

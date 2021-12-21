@@ -35,6 +35,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.btnCreate = new System.Windows.Forms.Button();
+            this.cbAdmin = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // txtFullName
@@ -91,7 +92,7 @@
             // 
             // btnCreate
             // 
-            this.btnCreate.Location = new System.Drawing.Point(196, 132);
+            this.btnCreate.Location = new System.Drawing.Point(190, 169);
             this.btnCreate.Name = "btnCreate";
             this.btnCreate.Size = new System.Drawing.Size(154, 37);
             this.btnCreate.TabIndex = 6;
@@ -99,11 +100,22 @@
             this.btnCreate.UseVisualStyleBackColor = true;
             this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
             // 
+            // cbAdmin
+            // 
+            this.cbAdmin.AutoSize = true;
+            this.cbAdmin.Location = new System.Drawing.Point(125, 132);
+            this.cbAdmin.Name = "cbAdmin";
+            this.cbAdmin.Size = new System.Drawing.Size(95, 27);
+            this.cbAdmin.TabIndex = 7;
+            this.cbAdmin.Text = "Admin";
+            this.cbAdmin.UseVisualStyleBackColor = true;
+            // 
             // frmCreateUser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(428, 184);
+            this.ClientSize = new System.Drawing.Size(428, 218);
+            this.Controls.Add(this.cbAdmin);
             this.Controls.Add(this.btnCreate);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -133,5 +145,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnCreate;
+        private System.Windows.Forms.CheckBox cbAdmin;
     }
 }

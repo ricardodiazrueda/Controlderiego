@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Entities;
 using Comunication;
+using Data;
 
 namespace Presentation
 {
@@ -19,11 +20,15 @@ namespace Presentation
         ProgramBusiness programBusiness = new ProgramBusiness();
         SprinklerBusiness sprinklerBusiness = new SprinklerBusiness();
         List<ProgramEntity> programList = new List<ProgramEntity>();
+        LogData logData = new LogData();
         List<ProgramEntity> programs = null;
         List<ProgramEntity> sent = new List<ProgramEntity>();
         List<ProgramEntity> late = new List<ProgramEntity>();
         List<ProgramEntity> fail = new List<ProgramEntity>();
-        public frmProgram()
+
+        List<string> days = null;
+        UserEntity user = null;
+        public frmProgram(UserEntity user)
         {
             InitializeComponent();
             int radios = radioBusiness.Quantity();
@@ -31,7 +36,11 @@ namespace Presentation
             for (int i = 1; i <= radios; i++)
                 cbxRadios.Items.Add("Radio " + i);
             LoadPrograms();
+            this.user = user;
             clock_Tick(null, null);
+
+            string[] days = { "domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado" };
+            this.days = days.ToList();
 
             Serial.callback = (data) =>
             {
@@ -86,10 +95,15 @@ namespace Presentation
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            int id = radioBusiness.PrevQuantity(cbxRadios.SelectedIndex + 1) + cbxSprinklers.SelectedIndex + 1;
-            programBusiness.Create(id, dtpTime.Value.ToString("HH:mm"), rbOn.Checked ? 1 : 0);
-            ListShowPrograms();
-            LoadPrograms();
+            if (cbxRadios.SelectedIndex != -1 && cbxSprinklers.SelectedIndex != -1 && cbxDay.SelectedIndex != -1)
+            {
+                int id = radioBusiness.PrevQuantity(cbxRadios.SelectedIndex + 1) + cbxSprinklers.SelectedIndex + 1;
+                string date = cbxDay.Text + " " + dtpTime.Value.ToString("HH:mm");
+                programBusiness.Create(id, date, rbOn.Checked ? 1 : 0);
+                logData.Insert(new LogEntity() { Type = "SOLENOIDE PROGRAM", Data = user.FullName + " programó el solenoide " + id + " para " + (rbOn.Checked ? "encenderse" : "apagarse") +  " el dia " + date, EntityID = user.UserID });
+                ListShowPrograms();
+                LoadPrograms();
+            }
         }
 
         private void cbxSprinklers_SelectedIndexChanged(object sender, EventArgs e)
@@ -99,7 +113,7 @@ namespace Presentation
 
         private void clock_Tick(object sender, EventArgs e)
         {
-            string time = DateTime.Now.ToString("HH:mm");
+            string time = DateTime.Now.ToString("dddd HH:mm");
             
             List<ProgramEntity> found = programList.FindAll(x => x.ActionTime == time);
             foreach (ProgramEntity program in found)
@@ -161,11 +175,13 @@ namespace Presentation
                     }
                     else if (!program.Finish && program.ActionTime != time)
                     {
+                        string[] data = program.ActionTime.Split(' ');
                         int min = 10;
-                        string[] t = program.ActionTime.Split(':');
-                        int newHour = (int.Parse(t[0])) + ((int.Parse(t[1]) + min) / 60);
+                        string[] t = data[1].Split(':');
+                        int newHour = (int.Parse(t[0]) + ((int.Parse(t[1]) + min) / 60)) % 24;
                         int newMinute = (int.Parse(t[1]) + min) % 60;
-                        string newTime = newHour.ToString().PadLeft(2, '0') + ":" + newMinute.ToString().PadLeft(2, '0');
+                        int newDay = days.IndexOf(data[0]) + ((int.Parse(t[0]) + ((int.Parse(t[1]) + min) / 60)) / 24) % 7;
+                        string newTime = newHour.ToString().PadLeft(2, '0') + ":" + newMinute.ToString().PadLeft(2, '0') + ":" + days[newDay];
                         late.Add(new ProgramEntity() { Action = program.Action, SprinklerID = program.SprinklerID, Finish = false, ActionTime = newTime, ProgramID = -1, previus = program});
                         sent.Remove(program); i--;
                     }
@@ -186,14 +202,18 @@ namespace Presentation
                 }
             }
 
-            lblProgramados.Text = "Monitoreando: " + programList.Count + " actividades a las " + time;
+            lblProgramados.Text = "Monitoreando: " + programList.Count + " actividades en " + time;
             lblExecuting.Text = "En ejecucion: " + sent.Count.ToString();
             lblLate.Text = "Tarde: " + late.Count.ToString();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            int id = programs[lbxPrograms.SelectedIndex].ProgramID;
+            ProgramEntity program = programs[lbxPrograms.SelectedIndex];
+            int id = program.ProgramID;
+
+            logData.Insert(new LogEntity() { Type = "SOLENOIDE PROGRAM", Data = user.FullName + " eliminó la programación del solenoide " + program.SprinklerID + " para " + (program.Action == 1 ? "encenderse" : "apagarse") + " el dia " + program.ActionTime, EntityID = user.UserID });
+
             programBusiness.Delete(id);
             LoadPrograms();
             ListShowPrograms();

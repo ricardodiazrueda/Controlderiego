@@ -21,8 +21,8 @@ namespace Data
                     {
                         user.Password = Util.Util.Hash(user.Password);
 
-                        string query = "INSERT INTO Users (UserName, Password, FullName) VALUES ('{0}', '{1}', '{2}')";
-                        query = string.Format(query, user.UserName, user.Password, user.FullName);
+                        string query = "INSERT INTO Users (UserName, Password, FullName, Type) VALUES ('{0}', '{1}', '{2}', {3})";
+                        query = string.Format(query, user.UserName, user.Password, user.FullName, user.Type);
 
                         command.CommandText = query;
                         command.ExecuteNonQuery();
@@ -64,6 +64,7 @@ namespace Data
                                 user.UserName = Convert.ToString(reader["UserName"]);
                                 user.Password = Convert.ToString(reader["Password"]);
                                 user.FullName = Convert.ToString(reader["FullName"]);
+                                user.Type = Convert.ToInt32(reader["Type"]);
                             }
                         }
                     }
