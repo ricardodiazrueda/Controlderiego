@@ -21,9 +21,11 @@ namespace Presentation
         SprinklerBusiness sprinklerBusiness = new SprinklerBusiness();
         List<ProgramEntity> programList = new List<ProgramEntity>();
         LogData logData = new LogData();
+
         List<ProgramEntity> programs = null;
         List<ProgramEntity> sent = new List<ProgramEntity>();
         List<ProgramEntity> late = new List<ProgramEntity>();
+        List<ProgramEntity> done = new List<ProgramEntity>();
         List<ProgramEntity> fail = new List<ProgramEntity>();
 
         List<string> days = null;
@@ -37,7 +39,6 @@ namespace Presentation
                 cbxRadios.Items.Add("Radio " + i);
             LoadPrograms();
             this.user = user;
-            clock_Tick(null, null);
 
             string[] days = { "domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado" };
             this.days = days.ToList();
@@ -63,7 +64,6 @@ namespace Presentation
                     sprinklerBusiness.SetState(i_id, action);
 
                     List<ProgramEntity> found = sent.FindAll(x => x.SprinklerID == i_id && x.Action == action);
-
                     foreach (ProgramEntity entity in found)
                     {
                         entity.Finish = true;
@@ -181,7 +181,7 @@ namespace Presentation
                         int newHour = (int.Parse(t[0]) + ((int.Parse(t[1]) + min) / 60)) % 24;
                         int newMinute = (int.Parse(t[1]) + min) % 60;
                         int newDay = days.IndexOf(data[0]) + ((int.Parse(t[0]) + ((int.Parse(t[1]) + min) / 60)) / 24) % 7;
-                        string newTime = newHour.ToString().PadLeft(2, '0') + ":" + newMinute.ToString().PadLeft(2, '0') + ":" + days[newDay];
+                        string newTime = days[newDay] + " " + newHour.ToString().PadLeft(2, '0') + ":" + newMinute.ToString().PadLeft(2, '0');
                         late.Add(new ProgramEntity() { Action = program.Action, SprinklerID = program.SprinklerID, Finish = false, ActionTime = newTime, ProgramID = -1, previus = program});
                         sent.Remove(program); i--;
                     }
@@ -202,9 +202,17 @@ namespace Presentation
                 }
             }
 
-            lblProgramados.Text = "Monitoreando: " + programList.Count + " actividades en " + time;
+            lblProgramados.Text = "Monitoreando: " + programList.Count;
+            lbProgramados.DataSource = null;
+            lbProgramados.DataSource = programList;
+
             lblExecuting.Text = "En ejecucion: " + sent.Count.ToString();
+            lbExecuting.DataSource = null;
+            lbExecuting.DataSource = sent;
+
             lblLate.Text = "Tarde: " + late.Count.ToString();
+            lbLate.DataSource = null;
+            lbLate.DataSource = late;
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -217,6 +225,21 @@ namespace Presentation
             programBusiness.Delete(id);
             LoadPrograms();
             ListShowPrograms();
+        }
+
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            clock.Enabled = !clock.Enabled;
+            btnDelete.Enabled = !btnDelete.Enabled;
+            btnAdd.Enabled = !btnAdd.Enabled;
+
+            btnStart.BackColor = clock.Enabled ? Color.Red : Color.Green;
+            btnStart.Text = clock.Enabled ? "Detener" : "Empezar";
+
+            lblProgramados.Text = "Monitoreando: 0";
+            lblExecuting.Text = "En ejecución: 0";
+            lblLate.Text = "Tarde: 0";
+
             clock_Tick(null, null);
         }
     }
