@@ -32,11 +32,12 @@
             this.btnDisconnect = new System.Windows.Forms.Button();
             this.cbxPorts = new System.Windows.Forms.ComboBox();
             this.txtTerminal = new System.Windows.Forms.TextBox();
+            this.btnContinue = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnConnect
             // 
-            this.btnConnect.Location = new System.Drawing.Point(13, 55);
+            this.btnConnect.Location = new System.Drawing.Point(15, 55);
             this.btnConnect.Margin = new System.Windows.Forms.Padding(4);
             this.btnConnect.Name = "btnConnect";
             this.btnConnect.Size = new System.Drawing.Size(161, 33);
@@ -48,7 +49,7 @@
             // btnDisconnect
             // 
             this.btnDisconnect.Enabled = false;
-            this.btnDisconnect.Location = new System.Drawing.Point(182, 55);
+            this.btnDisconnect.Location = new System.Drawing.Point(184, 55);
             this.btnDisconnect.Margin = new System.Windows.Forms.Padding(4);
             this.btnDisconnect.Name = "btnDisconnect";
             this.btnDisconnect.Size = new System.Drawing.Size(161, 33);
@@ -61,7 +62,7 @@
             // 
             this.cbxPorts.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxPorts.FormattingEnabled = true;
-            this.cbxPorts.Location = new System.Drawing.Point(13, 12);
+            this.cbxPorts.Location = new System.Drawing.Point(15, 12);
             this.cbxPorts.Name = "cbxPorts";
             this.cbxPorts.Size = new System.Drawing.Size(330, 31);
             this.cbxPorts.TabIndex = 2;
@@ -69,23 +70,36 @@
             // txtTerminal
             // 
             this.txtTerminal.Enabled = false;
-            this.txtTerminal.Location = new System.Drawing.Point(13, 95);
+            this.txtTerminal.Location = new System.Drawing.Point(15, 95);
             this.txtTerminal.Name = "txtTerminal";
             this.txtTerminal.Size = new System.Drawing.Size(330, 32);
             this.txtTerminal.TabIndex = 3;
             this.txtTerminal.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtTerminal_KeyDown);
             // 
+            // btnContinue
+            // 
+            this.btnContinue.Enabled = false;
+            this.btnContinue.Location = new System.Drawing.Point(15, 134);
+            this.btnContinue.Margin = new System.Windows.Forms.Padding(4);
+            this.btnContinue.Name = "btnContinue";
+            this.btnContinue.Size = new System.Drawing.Size(330, 33);
+            this.btnContinue.TabIndex = 4;
+            this.btnContinue.Text = "Continuar";
+            this.btnContinue.UseVisualStyleBackColor = true;
+            this.btnContinue.Click += new System.EventHandler(this.btnContinue_Click);
+            // 
             // frmSetSerialPort
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(358, 139);
+            this.ClientSize = new System.Drawing.Size(358, 176);
+            this.Controls.Add(this.btnContinue);
             this.Controls.Add(this.txtTerminal);
             this.Controls.Add(this.cbxPorts);
             this.Controls.Add(this.btnDisconnect);
             this.Controls.Add(this.btnConnect);
             this.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmSetSerialPort";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -101,6 +115,7 @@
         private System.Windows.Forms.Button btnDisconnect;
         private System.Windows.Forms.ComboBox cbxPorts;
         private System.Windows.Forms.TextBox txtTerminal;
+        private System.Windows.Forms.Button btnContinue;
     }
 }
 

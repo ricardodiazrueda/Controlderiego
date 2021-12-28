@@ -17,6 +17,7 @@ namespace Presentation
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
             DataBusiness dataBusiness = new DataBusiness();
 
             if (dataBusiness.Read("Sprinklers") == "0")
@@ -29,8 +30,9 @@ namespace Presentation
                 frmLogin frm = new frmLogin();
                 if (frm.ShowDialog() == DialogResult.OK)
                 {
-                    //new frmSetSerialPort().ShowDialog();
-                    new frmMenu(frm.user).ShowDialog();
+                    frmSetSerialPort frmSerial = new frmSetSerialPort();
+                    if (frmSerial.ShowDialog() == DialogResult.OK)
+                        new frmMenu(frm.user).ShowDialog();
                 }
             }
         }

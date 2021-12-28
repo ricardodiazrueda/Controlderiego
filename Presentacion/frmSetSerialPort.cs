@@ -27,6 +27,7 @@ namespace Presentation
             {
                 txtTerminal.Enabled = true;
                 btnDisconnect.Enabled = true;
+                btnContinue.Enabled = true;
             }
         }
         private void btnDisconnect_Click(object sender, EventArgs e)
@@ -35,6 +36,7 @@ namespace Presentation
             {
                 txtTerminal.Enabled = false;
                 btnDisconnect.Enabled = false;
+                btnContinue.Enabled = false;
             }
         }
 
@@ -48,5 +50,9 @@ namespace Presentation
             }
         }
 
+        private void btnContinue_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.OK;
+        }
     }
 }

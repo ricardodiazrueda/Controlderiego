@@ -132,5 +132,29 @@ namespace Data
                 return ex.Message;
             }
         }
+        public string Delete()
+        {
+            try
+            {
+                using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+                {
+                    connection.Open();
+                    using (SQLiteCommand command = new SQLiteCommand(connection))
+                    {
+                        string query = "DELETE FROM Program";
+
+                        command.CommandText = query;
+                        command.ExecuteNonQuery();
+                    }
+                    connection.Close();
+                }
+
+                return "OK";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
     }
 }

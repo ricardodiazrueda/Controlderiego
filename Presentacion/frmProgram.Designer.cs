@@ -52,6 +52,7 @@
             this.lbExecuting = new System.Windows.Forms.ListBox();
             this.lbLate = new System.Windows.Forms.ListBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.btnDeleteAll = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -288,11 +289,22 @@
             this.label4.TabIndex = 19;
             this.label4.Text = "Fallas:";
             // 
+            // btnDeleteAll
+            // 
+            this.btnDeleteAll.Location = new System.Drawing.Point(558, 277);
+            this.btnDeleteAll.Name = "btnDeleteAll";
+            this.btnDeleteAll.Size = new System.Drawing.Size(132, 66);
+            this.btnDeleteAll.TabIndex = 20;
+            this.btnDeleteAll.Text = "Eliminar\r\nTodo";
+            this.btnDeleteAll.UseVisualStyleBackColor = true;
+            this.btnDeleteAll.Click += new System.EventHandler(this.btnDeleteAll_Click);
+            // 
             // frmProgram
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(708, 680);
+            this.Controls.Add(this.btnDeleteAll);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.lbLate);
             this.Controls.Add(this.lbExecuting);
@@ -351,5 +363,6 @@
         private System.Windows.Forms.ListBox lbExecuting;
         private System.Windows.Forms.ListBox lbLate;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button btnDeleteAll;
     }
 }

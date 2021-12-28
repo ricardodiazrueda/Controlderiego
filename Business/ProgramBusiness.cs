@@ -27,5 +27,9 @@ namespace Business
         {
             return programData.Delete(ProgramID);
         }
+        public string Delete()
+        {
+            return programData.Delete();
+        }
     }
 }

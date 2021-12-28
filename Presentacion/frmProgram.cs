@@ -242,5 +242,17 @@ namespace Presentation
 
             clock_Tick(null, null);
         }
+
+        private void btnDeleteAll_Click(object sender, EventArgs e)
+        {
+            ProgramEntity program = programs[lbxPrograms.SelectedIndex];
+            int id = program.ProgramID;
+
+            logData.Insert(new LogEntity() { Type = "SOLENOIDE PROGRAM", Data = user.FullName + " eliminó todos los programas", EntityID = user.UserID });
+
+            programBusiness.Delete();
+            LoadPrograms();
+            ListShowPrograms();
+        }
     }
 }

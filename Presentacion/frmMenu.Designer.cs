@@ -62,6 +62,7 @@
             this.btnLog.TabIndex = 2;
             this.btnLog.Text = "Log";
             this.btnLog.UseVisualStyleBackColor = true;
+            this.btnLog.Click += new System.EventHandler(this.btnLog_Click);
             // 
             // frmMenu
             // 

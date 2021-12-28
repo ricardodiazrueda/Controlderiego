@@ -52,5 +52,10 @@ namespace Presentation
         {
             new frmProgram(user).ShowDialog();
         }
+
+        private void btnLog_Click(object sender, EventArgs e)
+        {
+            new frmLog().ShowDialog();
+        }
     }
 }
