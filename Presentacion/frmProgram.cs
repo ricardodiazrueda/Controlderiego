@@ -198,6 +198,7 @@ namespace Presentation
                         sent.Remove(program); i--;
                         late.Remove(program);
                         lbxAlerts.Items.Add(program.previus);
+                        logData.Insert(new LogEntity() { Type = "SOLENOIDE PROGRAM FAIL", Data = "Falló la programación del solenoide " + program.SprinklerID + " para " + (program.Action == 1 ? "encenderse" : "apagarse") + " el dia " + program.ActionTime, EntityID = program.SprinklerID });
                     }
                 }
             }
@@ -232,6 +233,7 @@ namespace Presentation
             clock.Enabled = !clock.Enabled;
             btnDelete.Enabled = !btnDelete.Enabled;
             btnAdd.Enabled = !btnAdd.Enabled;
+            btnDeleteAll.Enabled = !btnDeleteAll.Enabled;
 
             btnStart.BackColor = clock.Enabled ? Color.Red : Color.Green;
             btnStart.Text = clock.Enabled ? "Detener" : "Empezar";
