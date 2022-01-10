@@ -63,7 +63,7 @@ namespace Comunication
                 if (serialPort == null)
                     throw new Exception("Serial not initialized");
                 serialPort.WriteLine(data);
-                Console.WriteLine(time + "Sent: " + data);
+                Console.WriteLine(time + " Sent: " + data);
             }
             catch (Exception ex)
             {
@@ -76,7 +76,7 @@ namespace Comunication
             try
             {
                 string data = serialPort.ReadLine();
-                Console.WriteLine(time + "Received: " + data);
+                Console.WriteLine(time + " Received: " + data);
                 callback(data);
             }
             catch(Exception ex)

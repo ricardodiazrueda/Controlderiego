@@ -33,6 +33,7 @@
             this.dtpEnd = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
             this.lbxLog = new System.Windows.Forms.ListBox();
+            this.btnBorrar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // dtpStart
@@ -79,14 +80,25 @@
             this.lbxLog.ItemHeight = 23;
             this.lbxLog.Location = new System.Drawing.Point(13, 75);
             this.lbxLog.Name = "lbxLog";
-            this.lbxLog.Size = new System.Drawing.Size(783, 464);
+            this.lbxLog.Size = new System.Drawing.Size(783, 418);
             this.lbxLog.TabIndex = 5;
+            // 
+            // btnBorrar
+            // 
+            this.btnBorrar.Location = new System.Drawing.Point(629, 499);
+            this.btnBorrar.Name = "btnBorrar";
+            this.btnBorrar.Size = new System.Drawing.Size(167, 45);
+            this.btnBorrar.TabIndex = 6;
+            this.btnBorrar.Text = "Borrar registros";
+            this.btnBorrar.UseVisualStyleBackColor = true;
+            this.btnBorrar.Click += new System.EventHandler(this.btnBorrar_Click);
             // 
             // frmLog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(809, 556);
+            this.Controls.Add(this.btnBorrar);
             this.Controls.Add(this.lbxLog);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.dtpEnd);
@@ -112,5 +124,6 @@
         private System.Windows.Forms.DateTimePicker dtpEnd;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ListBox lbxLog;
+        private System.Windows.Forms.Button btnBorrar;
     }
 }

@@ -53,7 +53,7 @@ namespace Data
                         {
                             while (reader.Read())
                             {
-                                list.Add(Convert.ToString(reader["LogDate"])  + " " + Convert.ToString(reader["Type"]) + " " + Convert.ToString(reader["Data"]));
+                                list.Add(Convert.ToString(reader["LogDate"]) + " " + Convert.ToString(reader["Type"]) + " " + Convert.ToString(reader["Data"]));
                             }
                         }
                     }
@@ -65,6 +65,31 @@ namespace Data
             catch (Exception ex)
             {
                 return null;
+            }
+        }
+        public string Delete(DateTime start, DateTime end)
+        {
+            try
+            {
+                using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+                {
+                    connection.Open();
+                    using (SQLiteCommand command = new SQLiteCommand(connection))
+                    {
+                        string query = "DELETE FROM Logs WHERE LogDate >= '{0}' AND LogDate < '{1}'";
+                        query = string.Format(query, start.ToString("yyyy-MM-dd HH:mm:ss"), end.ToString("yyyy-MM-dd HH:mm:ss"));
+
+                        command.CommandText = query;
+                        command.ExecuteNonQuery();
+                    }
+                    connection.Close();
+                }
+
+                return "OK";
+            }
+            catch (Exception ex)
+            {
+                return ex.ToString();
             }
         }
     }

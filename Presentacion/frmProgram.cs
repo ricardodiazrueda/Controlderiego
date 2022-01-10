@@ -62,6 +62,8 @@ namespace Presentation
                         action = 1;
                     
                     sprinklerBusiness.SetState(i_id, action);
+                    logData.Insert(new LogEntity() { Type = "SOLENOIDE PROGRAM COMPLETE", Data = "El solenoide " + i_id + " se " + ((action == 1) ? "prendió" : "apagó") + "correctamente", EntityID = i_id });
+
 
                     List<ProgramEntity> found = sent.FindAll(x => x.SprinklerID == i_id && x.Action == action);
                     foreach (ProgramEntity entity in found)

@@ -33,5 +33,11 @@ namespace Presentation
         {
             FillLogs();
         }
+
+        private void btnBorrar_Click(object sender, EventArgs e)
+        {
+            logData.Delete(dtpStart.Value, dtpEnd.Value);
+            lbxLog.DataSource = null;
+        }
     }
 }
