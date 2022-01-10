@@ -20,7 +20,7 @@ namespace Data
                     using (SQLiteCommand command = new SQLiteCommand(connection))
                     {
                         string query = "INSERT INTO Logs (EntityID, LogDate, Type, Data) VALUES ({0}, '{1}', '{2}', '{3}')";
-                        query = string.Format(query, log.EntityID != null ? log.EntityID.ToString() : "null", DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), log.Type, log.Data);
+                        query = string.Format(query, log.EntityID != null ? log.EntityID.ToString() : "null", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), log.Type, log.Data);
 
                         command.CommandText = query;
                         command.ExecuteNonQuery();

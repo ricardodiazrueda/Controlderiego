@@ -56,30 +56,32 @@ namespace Comunication
 
         public static void Send(string data)
         {
+            string time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             try
             {
-                Console.WriteLine("Sending: " + data);
+                Console.WriteLine(time + " Sending: " + data);
                 if (serialPort == null)
                     throw new Exception("Serial not initialized");
                 serialPort.WriteLine(data);
-                Console.WriteLine("Sent: " + data);
+                Console.WriteLine(time + "Sent: " + data);
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.ToString());
+                Console.WriteLine(time + " " + ex.ToString());
             }
         }
         private static void Receive(object sender, SerialDataReceivedEventArgs e)
         {
+            string time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             try
             {
                 string data = serialPort.ReadLine();
-                Console.WriteLine("Received: " + data);
+                Console.WriteLine(time + "Received: " + data);
                 callback(data);
             }
             catch(Exception ex)
             {
-                Console.WriteLine(ex.ToString());
+                Console.WriteLine(time + " " + ex.ToString());
             }
         }
     }
