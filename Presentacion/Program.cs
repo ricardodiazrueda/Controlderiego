@@ -30,9 +30,14 @@ namespace Presentation
                 frmLogin frm = new frmLogin();
                 if (frm.ShowDialog() == DialogResult.OK)
                 {
-                    //frmSetSerialPort frmSerial = new frmSetSerialPort();
-                    //if (frmSerial.ShowDialog() == DialogResult.OK)
+                    frmSetSerialPort frmSerial = new frmSetSerialPort();
+                    if (frmSerial.ShowDialog() == DialogResult.OK)
+                    {
+                        if (frm.user.UserName == "admin" && frm.user.Type == 1)
+                            frmSerial.Show();
+
                         new frmMenu(frm.user).ShowDialog();
+                    }
                 }
             }
         }

@@ -52,7 +52,7 @@ namespace Presentation
 
         private void btnContinue_Click(object sender, EventArgs e)
         {
-            DialogResult = DialogResult.OK;
+            this.DialogResult = DialogResult.OK;
         }
     }
 }
