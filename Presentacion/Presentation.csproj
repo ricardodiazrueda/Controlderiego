@@ -55,6 +55,12 @@
     <Compile Include="frmLog.Designer.cs">
       <DependentUpon>frmLog.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmMonitoring.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMonitoring.Designer.cs">
+      <DependentUpon>frmMonitoring.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmProgram.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -101,6 +107,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmLog.resx">
       <DependentUpon>frmLog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMonitoring.resx">
+      <DependentUpon>frmMonitoring.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmProgram.resx">
       <DependentUpon>frmProgram.cs</DependentUpon>

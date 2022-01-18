@@ -13,7 +13,8 @@ namespace Entities
         public string ActionTime { get; set; }
         public int Action { get; set; }
         public bool Finish { get; set; }
-        public ProgramEntity previus { get; set; }  
+        public ProgramEntity previus { get; set; }
+        public bool Sent { get; set; } = false;
         public override string ToString()
         {
 

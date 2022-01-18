@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.cbxRadios = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -42,16 +41,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.cbxDay = new System.Windows.Forms.ComboBox();
             this.dtpTime = new System.Windows.Forms.DateTimePicker();
-            this.clock = new System.Windows.Forms.Timer(this.components);
-            this.lblProgramados = new System.Windows.Forms.Label();
-            this.lbxAlerts = new System.Windows.Forms.ListBox();
-            this.lblExecuting = new System.Windows.Forms.Label();
-            this.lblLate = new System.Windows.Forms.Label();
             this.btnStart = new System.Windows.Forms.Button();
-            this.lbProgramados = new System.Windows.Forms.ListBox();
-            this.lbExecuting = new System.Windows.Forms.ListBox();
-            this.lbLate = new System.Windows.Forms.ListBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.btnDeleteAll = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -201,47 +191,6 @@
             this.dtpTime.Size = new System.Drawing.Size(114, 32);
             this.dtpTime.TabIndex = 10;
             // 
-            // clock
-            // 
-            this.clock.Interval = 10000;
-            this.clock.Tick += new System.EventHandler(this.clock_Tick);
-            // 
-            // lblProgramados
-            // 
-            this.lblProgramados.AutoSize = true;
-            this.lblProgramados.Location = new System.Drawing.Point(12, 401);
-            this.lblProgramados.Name = "lblProgramados";
-            this.lblProgramados.Size = new System.Drawing.Size(175, 23);
-            this.lblProgramados.TabIndex = 11;
-            this.lblProgramados.Text = "Monitoreando: 0 ";
-            // 
-            // lbxAlerts
-            // 
-            this.lbxAlerts.FormattingEnabled = true;
-            this.lbxAlerts.ItemHeight = 23;
-            this.lbxAlerts.Location = new System.Drawing.Point(16, 598);
-            this.lbxAlerts.Name = "lbxAlerts";
-            this.lbxAlerts.Size = new System.Drawing.Size(674, 73);
-            this.lbxAlerts.TabIndex = 12;
-            // 
-            // lblExecuting
-            // 
-            this.lblExecuting.AutoSize = true;
-            this.lblExecuting.Location = new System.Drawing.Point(242, 401);
-            this.lblExecuting.Name = "lblExecuting";
-            this.lblExecuting.Size = new System.Drawing.Size(156, 23);
-            this.lblExecuting.TabIndex = 13;
-            this.lblExecuting.Text = "En ejecución: 0";
-            // 
-            // lblLate
-            // 
-            this.lblLate.AutoSize = true;
-            this.lblLate.Location = new System.Drawing.Point(462, 401);
-            this.lblLate.Name = "lblLate";
-            this.lblLate.Size = new System.Drawing.Size(87, 23);
-            this.lblLate.TabIndex = 14;
-            this.lblLate.Text = "Tarde: 0";
-            // 
             // btnStart
             // 
             this.btnStart.BackColor = System.Drawing.Color.Green;
@@ -252,42 +201,6 @@
             this.btnStart.Text = "Empezar";
             this.btnStart.UseVisualStyleBackColor = false;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
-            // 
-            // lbProgramados
-            // 
-            this.lbProgramados.FormattingEnabled = true;
-            this.lbProgramados.ItemHeight = 23;
-            this.lbProgramados.Location = new System.Drawing.Point(16, 427);
-            this.lbProgramados.Name = "lbProgramados";
-            this.lbProgramados.Size = new System.Drawing.Size(224, 142);
-            this.lbProgramados.TabIndex = 16;
-            // 
-            // lbExecuting
-            // 
-            this.lbExecuting.FormattingEnabled = true;
-            this.lbExecuting.ItemHeight = 23;
-            this.lbExecuting.Location = new System.Drawing.Point(246, 427);
-            this.lbExecuting.Name = "lbExecuting";
-            this.lbExecuting.Size = new System.Drawing.Size(214, 142);
-            this.lbExecuting.TabIndex = 17;
-            // 
-            // lbLate
-            // 
-            this.lbLate.FormattingEnabled = true;
-            this.lbLate.ItemHeight = 23;
-            this.lbLate.Location = new System.Drawing.Point(466, 427);
-            this.lbLate.Name = "lbLate";
-            this.lbLate.Size = new System.Drawing.Size(224, 142);
-            this.lbLate.TabIndex = 18;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 572);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(71, 23);
-            this.label4.TabIndex = 19;
-            this.label4.Text = "Fallas:";
             // 
             // btnDeleteAll
             // 
@@ -303,17 +216,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(708, 680);
+            this.ClientSize = new System.Drawing.Size(708, 407);
             this.Controls.Add(this.btnDeleteAll);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.lbLate);
-            this.Controls.Add(this.lbExecuting);
-            this.Controls.Add(this.lbProgramados);
             this.Controls.Add(this.btnStart);
-            this.Controls.Add(this.lblLate);
-            this.Controls.Add(this.lblExecuting);
-            this.Controls.Add(this.lbxAlerts);
-            this.Controls.Add(this.lblProgramados);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.label3);
@@ -352,17 +257,8 @@
         private System.Windows.Forms.RadioButton rbOff;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DateTimePicker dtpTime;
-        private System.Windows.Forms.Timer clock;
-        private System.Windows.Forms.Label lblProgramados;
-        private System.Windows.Forms.ListBox lbxAlerts;
-        private System.Windows.Forms.Label lblExecuting;
-        private System.Windows.Forms.Label lblLate;
         private System.Windows.Forms.ComboBox cbxDay;
         private System.Windows.Forms.Button btnStart;
-        private System.Windows.Forms.ListBox lbProgramados;
-        private System.Windows.Forms.ListBox lbExecuting;
-        private System.Windows.Forms.ListBox lbLate;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnDeleteAll;
     }
 }
