@@ -183,7 +183,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(969, 782);
+            this.ClientSize = new System.Drawing.Size(969, 836);
             this.Controls.Add(this.btnBorrarTodos);
             this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.btnBorrar);

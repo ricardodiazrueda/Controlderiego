@@ -45,7 +45,7 @@ namespace ControlRiego
         string ObtenerHora()
         {
             string dia = DateTime.Now.ToString("dddd");
-            string hora = DateTime.Now.ToString("t");
+            string hora = DateTime.Now.ToString("HH:mm");
 
             if (dia == "domingo")
                 dia = "0 ";
