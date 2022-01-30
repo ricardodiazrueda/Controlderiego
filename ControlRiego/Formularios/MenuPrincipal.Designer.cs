@@ -31,6 +31,7 @@
             this.btnManual = new System.Windows.Forms.Button();
             this.btnProgramar = new System.Windows.Forms.Button();
             this.btnMonitorear = new System.Windows.Forms.Button();
+            this.btnRevisarLogs = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnManual
@@ -63,11 +64,22 @@
             this.btnMonitorear.UseVisualStyleBackColor = true;
             this.btnMonitorear.Click += new System.EventHandler(this.btnMonitorear_Click);
             // 
+            // btnRevisarLogs
+            // 
+            this.btnRevisarLogs.Location = new System.Drawing.Point(12, 154);
+            this.btnRevisarLogs.Name = "btnRevisarLogs";
+            this.btnRevisarLogs.Size = new System.Drawing.Size(306, 65);
+            this.btnRevisarLogs.TabIndex = 3;
+            this.btnRevisarLogs.Text = "Revisar Logs";
+            this.btnRevisarLogs.UseVisualStyleBackColor = true;
+            this.btnRevisarLogs.Click += new System.EventHandler(this.btnRevisarLogs_Click);
+            // 
             // MenuPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(335, 167);
+            this.ClientSize = new System.Drawing.Size(335, 235);
+            this.Controls.Add(this.btnRevisarLogs);
             this.Controls.Add(this.btnMonitorear);
             this.Controls.Add(this.btnProgramar);
             this.Controls.Add(this.btnManual);
@@ -84,5 +96,6 @@
         private System.Windows.Forms.Button btnManual;
         private System.Windows.Forms.Button btnProgramar;
         private System.Windows.Forms.Button btnMonitorear;
+        private System.Windows.Forms.Button btnRevisarLogs;
     }
 }

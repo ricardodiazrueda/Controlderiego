@@ -23,13 +23,16 @@ namespace ControlRiego
                 new ConfigurarUsuarios().ShowDialog();
             }
 
-            //IniciarSesion iniciarSesion = new IniciarSesion();
-            //if (iniciarSesion.ShowDialog() == DialogResult.OK)
+            IniciarSesion iniciarSesion = new IniciarSesion();
+            if (iniciarSesion.ShowDialog() == DialogResult.OK)
             {
                 ConsolaSerial consolaSerial = new ConsolaSerial();
                 if (consolaSerial.ShowDialog() == DialogResult.OK)
                 {
-                    Application.Run(new MenuPrincipal());
+                    if (iniciarSesion.Usuario.Tipo)
+                        consolaSerial.Show();
+
+                    Application.Run(new MenuPrincipal(iniciarSesion.Usuario));
                 }
             }
         }

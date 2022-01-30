@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entidades\Log.cs" />
     <Compile Include="Entidades\Programa.cs" />
     <Compile Include="Formularios\ConsolaSerial.cs">
       <SubType>Form</SubType>
@@ -94,6 +95,12 @@
     </Compile>
     <Compile Include="Formularios\MonitorearHorarios.Designer.cs">
       <DependentUpon>MonitorearHorarios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\RevisarLogs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\RevisarLogs.Designer.cs">
+      <DependentUpon>RevisarLogs.cs</DependentUpon>
     </Compile>
     <Compile Include="Util\BaseDatos.cs" />
     <Compile Include="Entidades\Usuario.cs" />
@@ -142,6 +149,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Formularios\RevisarLogs.resx">
+      <DependentUpon>RevisarLogs.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

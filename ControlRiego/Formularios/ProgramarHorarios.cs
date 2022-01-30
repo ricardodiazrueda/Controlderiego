@@ -12,12 +12,14 @@ namespace ControlRiego
 {
     public partial class ProgramarHorarios : Form
     {
+        Usuario usuario = null;
         List<CheckBox> checkBoxes = new List<CheckBox>();
         List<Programa> programasEncendido = null;
         List<Programa> programasApagado = null;
-        public ProgramarHorarios()
+        public ProgramarHorarios(Usuario usuario)
         {
             InitializeComponent();
+            this.usuario = usuario;
             int radios = BaseDatos.LeerCantidadRadios();
             int k = 0;
             for (int i = 1; i <= radios; i++)
@@ -99,6 +101,7 @@ namespace ControlRiego
                             programa.Accion = accion;
 
                             BaseDatos.CrearPrograma(programa);
+                            BaseDatos.CrearLog(new Log() { Tipo = "Crear Programa", Info = usuario.Nombre + " creó un programa para " + (programa.Accion ? "encender" : "apagar") + " el solenoide " + programa.ToString() });
                         }
                     }
                     LlenarListasProgramas();
@@ -114,16 +117,25 @@ namespace ControlRiego
         private void btnBorrarTodos_Click(object sender, EventArgs e)
         {
             BaseDatos.BorrarTodosProgramas();
+            BaseDatos.CrearLog(new Log() { Tipo = "Crear Programa", Info = usuario.Nombre + " borró todos los programas" });
             LlenarListasProgramas();
         }
 
         private void btnBorrar_Click(object sender, EventArgs e)
         {
             if (lbxEncender.SelectedIndex != -1)
-                BaseDatos.BorrarPrograma(programasEncendido[lbxEncender.SelectedIndex]);
+            {
+                Programa programa = programasEncendido[lbxEncender.SelectedIndex];
+                BaseDatos.BorrarPrograma(programa);
+                BaseDatos.CrearLog(new Log() { Tipo = "Crear Programa", Info = usuario.Nombre + " borró el programa para " + (programa.Accion ? "encender" : "apagar") + " el solenoide " + programa.ToString() });
+            }
 
             if (lbxApagar.SelectedIndex != -1)
-                BaseDatos.BorrarPrograma(programasApagado[lbxApagar.SelectedIndex]);
+            {
+                Programa programa = programasApagado[lbxApagar.SelectedIndex];
+                BaseDatos.BorrarPrograma(programa);
+                BaseDatos.CrearLog(new Log() { Tipo = "Crear Programa", Info = usuario.Nombre + " borró el programa para " + (programa.Accion ? "encender" : "apagar") + " el solenoide " + programa.ToString() });
+            }
 
             LlenarListasProgramas();
         }

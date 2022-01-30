@@ -12,6 +12,7 @@ namespace ControlRiego
 {
     public partial class MonitorearHorarios : Form
     {
+        Usuario usuario = null;
         int reprogramacion = 1; // en cuantos minutos se reprograma
 
         List<Programa> programasEsperando;
@@ -20,9 +21,10 @@ namespace ControlRiego
         List<Programa> programasFallados = new List<Programa>();
         List<Programa> programasEjecutados = new List<Programa>();
 
-        public MonitorearHorarios()
+        public MonitorearHorarios(Usuario usuario)
         {
             InitializeComponent();
+            this.usuario = usuario;
             lblHora.Text = "Dia, fecha y hora: " + DateTime.Now.ToString("U");
 
             programasEsperando = BaseDatos.LeerTodosProgramas();
@@ -38,6 +40,7 @@ namespace ControlRiego
                     {
                         programasEnviados.Remove(programa);
                         programasEjecutados.Add(programa);
+                        BaseDatos.CrearLog(new Log() { Tipo = "Monitorear Programa", Info = "¡Correcto! - Pograma para " + (programa.Accion ? "encender" : "apagar") + " el solenoide " + programa.ToString() });
                     }
                 }
             };
@@ -164,6 +167,7 @@ namespace ControlRiego
                     {
                         programasEnviados.Remove(tarde);
                         programasFallados.Add(tarde.Original);
+                        BaseDatos.CrearLog(new Log() { Tipo = "Monitorear Programa", Info = "¡Fallado! - Pograma para " + (tarde.Original.Accion ? "encender" : "apagar") + " el solenoide " + tarde.Original.ToString() });
                     }
                 }
             }

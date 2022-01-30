@@ -428,6 +428,28 @@ namespace ControlRiego
             {
                 return ex.Message;
             }
+            try
+            {
+                using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+                {
+                    connection.Open();
+                    using (SQLiteCommand command = new SQLiteCommand(connection))
+                    {
+                        string query = "INSERT INTO Programas (SolenoideID, Hora, Accion) VALUES ({0}, '{1}', {2})";
+                        query = string.Format(query, programa.SolenoideID, programa.Hora, programa.Accion ? 1 : 0);
+
+                        command.CommandText = query;
+                        command.ExecuteNonQuery();
+                    }
+                    connection.Close();
+                }
+
+                return "OK";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
         static public List<Programa> LeerTodosProgramas()
         {
@@ -514,5 +536,68 @@ namespace ControlRiego
             }
         }
 
+        // Logs
+        static public string CrearLog(Log log)
+        {
+            try
+            {
+                using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+                {
+                    connection.Open();
+                    using (SQLiteCommand command = new SQLiteCommand(connection))
+                    {
+                        string query = "INSERT INTO Logs (Fecha, Tipo, Info) VALUES ('{0}', '{1}', '{2}')";
+                        query = string.Format(query, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"), log.Tipo, log.Info);
+
+                        command.CommandText = query;
+                        command.ExecuteNonQuery();
+                    }
+                    connection.Close();
+                }
+
+                return "OK";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+        static public List<Log> LeerLogsFecha(DateTime fecha)
+        {
+            try
+            {
+                List<Log> logs = new List<Log>();
+
+                using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+                {
+                    connection.Open();
+                    using (SQLiteCommand command = new SQLiteCommand(connection))
+                    {
+                        string query = "SELECT * FROM Logs WHERE Fecha LIKE '" + fecha.ToString("yyyy/MM/dd") + "%'";
+
+                        command.CommandText = query;
+                        using (SQLiteDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                Log log = new Log();
+                                log.LogID = Convert.ToInt32(reader["LogID"]);
+                                log.Fecha = Convert.ToDateTime(reader["Fecha"]);
+                                log.Tipo = Convert.ToString(reader["Tipo"]);
+                                log.Info = Convert.ToString(reader["Info"]);
+                                logs.Add(log);
+                            }
+                        }
+                    }
+                    connection.Close();
+                }
+
+                return logs;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
     }
 }

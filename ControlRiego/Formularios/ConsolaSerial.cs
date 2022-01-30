@@ -42,5 +42,13 @@ namespace ControlRiego
         {
             this.DialogResult = DialogResult.OK;
         }
+
+        private void txtEnviar_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Serial.Send(txtEnviar.Text);
+            }
+        }
     }
 }

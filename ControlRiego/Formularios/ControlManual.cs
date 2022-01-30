@@ -12,11 +12,13 @@ namespace ControlRiego
 {
     public partial class ControlManual : Form
     {
+        Usuario usuario = null;
         List<Button> botones = new List<Button>();
         Button presionado = null;
-        public ControlManual()
+        public ControlManual(Usuario usuario)
         {
             InitializeComponent();
+            this.usuario = usuario;
 
             int cantidad = BaseDatos.LeerCantidadRadios();
             for (int i = 1; i <= cantidad; i++)
@@ -32,6 +34,7 @@ namespace ControlRiego
                         sole.Estado = accion == 'E';
                         BaseDatos.ModificarSolenoide(sole);
                         presionado.BackColor = sole.Estado ? Color.Green : Color.Red;
+                        BaseDatos.CrearLog(new Log() { Tipo = "Control Manual", Info = "¡Correcto! - " + usuario.Nombre + " " + (sole.Estado ? "encendió" : "apagaó") + " el solenoide " + sole.SolenoideID });
                     }
                 }
             };
@@ -102,6 +105,8 @@ namespace ControlRiego
                         presionado.BackColor = Color.Green;
                     else
                         presionado.BackColor = Color.Red;
+                    
+                    BaseDatos.CrearLog(new Log() { Tipo = "Control Manual", Info = "¡Fallido! - " + usuario.Nombre + " intentó " + (!solenoide.Estado ? "encender" : "apagar") + " el solenoide " + solenoide.SolenoideID  });
                 }
             }
 

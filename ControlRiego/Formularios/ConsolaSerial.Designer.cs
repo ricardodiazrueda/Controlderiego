@@ -72,6 +72,7 @@
             this.txtEnviar.Name = "txtEnviar";
             this.txtEnviar.Size = new System.Drawing.Size(339, 22);
             this.txtEnviar.TabIndex = 3;
+            this.txtEnviar.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtEnviar_KeyDown);
             // 
             // label2
             // 
