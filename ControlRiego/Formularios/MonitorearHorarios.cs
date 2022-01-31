@@ -87,7 +87,7 @@ namespace ControlRiego
                 hora = hora % 24;
             }
 
-            return dia + " " + hora.ToString("##") + ":" + minuto.ToString("##");
+            return dia + " " + hora.ToString().PadLeft(2, '0') + ":" + minuto.ToString().PadLeft(2, '0');
         }
 
         void LlenarListasProgramas()
