@@ -600,5 +600,42 @@ namespace ControlRiego
                 return null;
             }
         }
+        static public List<Log> LeerLogsBateriaBaja()
+        {
+            try
+            {
+                List<Log> logs = new List<Log>();
+
+                using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+                {
+                    connection.Open();
+                    using (SQLiteCommand command = new SQLiteCommand(connection))
+                    {
+                        string query = "SELECT * FROM Logs WHERE Tipo = 'Bateria Baja'";
+
+                        command.CommandText = query;
+                        using (SQLiteDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                Log log = new Log();
+                                log.LogID = Convert.ToInt32(reader["LogID"]);
+                                log.Fecha = Convert.ToDateTime(reader["Fecha"]);
+                                log.Tipo = Convert.ToString(reader["Tipo"]);
+                                log.Info = Convert.ToString(reader["Info"]);
+                                logs.Add(log);
+                            }
+                        }
+                    }
+                    connection.Close();
+                }
+
+                return logs;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
     }
 }

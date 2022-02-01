@@ -31,7 +31,13 @@ namespace ControlRiego
                             Clave = txtClave.Text,
                             Tipo = cbAdmin.Checked
                         });
+
                         MessageBox.Show("Usuario " + txtUsuario.Text + " creado");
+
+                        txtNombre.Clear();
+                        txtUsuario.Clear();
+                        txtClave.Clear();
+                        cbAdmin.Checked = false;
                     }
                     else
                         MessageBox.Show("Ingrese la clave");

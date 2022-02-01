@@ -85,7 +85,10 @@ namespace ControlRiego
                     int solenoide = data[2] - '@';
                     char accion = data[3];
 
-                    callback(radio, solenoide, accion);
+                    if (solenoide == '@' && accion == 'V')
+                        BaseDatos.CrearLog(new Log() { Tipo = "Bateria Baja", Info = "La radio " + radio + " ha informado baja batería" });
+                    else
+                        callback(radio, solenoide, accion);
                 }
             }
             catch(Exception ex)
