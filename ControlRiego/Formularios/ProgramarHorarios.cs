@@ -42,7 +42,7 @@ namespace ControlRiego
             label.AutoSize = true;
             label.Text = "Radio " + radio;
             label.Location = new Point(x, y - 20);
-            this.Controls.Add(label);
+            panel1.Controls.Add(label);
 
             foreach (Solenoide solenoide in solenoides)
             {
@@ -53,7 +53,7 @@ namespace ControlRiego
                 checkBox.Tag = solenoide;
 
                 k++;
-                this.Controls.Add(checkBox);
+                panel1.Controls.Add(checkBox);
                 checkBoxes.Add(checkBox);
                 this.ResumeLayout(false);
             }

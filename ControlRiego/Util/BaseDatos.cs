@@ -155,7 +155,8 @@ namespace ControlRiego
                         command.CommandText = query;
                         using (SQLiteDataReader reader = command.ExecuteReader())
                         {
-                            quantity = Convert.ToInt32(reader["Cantidad"]);
+                            if (reader.Read())
+                                quantity = Convert.ToInt32(reader["Cantidad"]);
                         }
                     }
                     connection.Close();

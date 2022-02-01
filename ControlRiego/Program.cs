@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -16,6 +17,12 @@ namespace ControlRiego
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            if (!File.Exists("data.db"))
+            {
+                File.WriteAllBytes("data.db", Properties.Resources.data);
+            }
+
 
             if (BaseDatos.LeerCantidadRadios() == 0)
             {

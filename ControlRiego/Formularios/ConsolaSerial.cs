@@ -48,6 +48,7 @@ namespace ControlRiego
             if (e.KeyCode == Keys.Enter)
             {
                 Serial.Send(txtEnviar.Text);
+                txtEnviar.Clear();
             }
         }
     }
