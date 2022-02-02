@@ -36,13 +36,14 @@
             this.lbBateriaBaja = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.timer = new System.Windows.Forms.Timer(this.components);
+            this.btnGestionarUsuarios = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnManual
             // 
             this.btnManual.Location = new System.Drawing.Point(12, 12);
             this.btnManual.Name = "btnManual";
-            this.btnManual.Size = new System.Drawing.Size(306, 65);
+            this.btnManual.Size = new System.Drawing.Size(306, 40);
             this.btnManual.TabIndex = 0;
             this.btnManual.Text = "Control Manual";
             this.btnManual.UseVisualStyleBackColor = true;
@@ -50,9 +51,9 @@
             // 
             // btnProgramar
             // 
-            this.btnProgramar.Location = new System.Drawing.Point(12, 89);
+            this.btnProgramar.Location = new System.Drawing.Point(12, 58);
             this.btnProgramar.Name = "btnProgramar";
-            this.btnProgramar.Size = new System.Drawing.Size(150, 65);
+            this.btnProgramar.Size = new System.Drawing.Size(150, 40);
             this.btnProgramar.TabIndex = 1;
             this.btnProgramar.Text = "Programar";
             this.btnProgramar.UseVisualStyleBackColor = true;
@@ -60,9 +61,9 @@
             // 
             // btnMonitorear
             // 
-            this.btnMonitorear.Location = new System.Drawing.Point(168, 89);
+            this.btnMonitorear.Location = new System.Drawing.Point(168, 58);
             this.btnMonitorear.Name = "btnMonitorear";
-            this.btnMonitorear.Size = new System.Drawing.Size(150, 65);
+            this.btnMonitorear.Size = new System.Drawing.Size(150, 40);
             this.btnMonitorear.TabIndex = 2;
             this.btnMonitorear.Text = "Monitorear";
             this.btnMonitorear.UseVisualStyleBackColor = true;
@@ -70,9 +71,9 @@
             // 
             // btnRevisarLogs
             // 
-            this.btnRevisarLogs.Location = new System.Drawing.Point(12, 163);
+            this.btnRevisarLogs.Location = new System.Drawing.Point(12, 108);
             this.btnRevisarLogs.Name = "btnRevisarLogs";
-            this.btnRevisarLogs.Size = new System.Drawing.Size(306, 65);
+            this.btnRevisarLogs.Size = new System.Drawing.Size(306, 40);
             this.btnRevisarLogs.TabIndex = 3;
             this.btnRevisarLogs.Text = "Revisar Logs";
             this.btnRevisarLogs.UseVisualStyleBackColor = true;
@@ -84,7 +85,7 @@
             this.lbBateriaBaja.ItemHeight = 16;
             this.lbBateriaBaja.Location = new System.Drawing.Point(324, 32);
             this.lbBateriaBaja.Name = "lbBateriaBaja";
-            this.lbBateriaBaja.Size = new System.Drawing.Size(448, 196);
+            this.lbBateriaBaja.Size = new System.Drawing.Size(448, 164);
             this.lbBateriaBaja.TabIndex = 4;
             // 
             // label1
@@ -102,11 +103,22 @@
             this.timer.Interval = 60000;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
+            // btnGestionarUsuarios
+            // 
+            this.btnGestionarUsuarios.Location = new System.Drawing.Point(12, 156);
+            this.btnGestionarUsuarios.Name = "btnGestionarUsuarios";
+            this.btnGestionarUsuarios.Size = new System.Drawing.Size(306, 40);
+            this.btnGestionarUsuarios.TabIndex = 6;
+            this.btnGestionarUsuarios.Text = "Gestionar Usuarios";
+            this.btnGestionarUsuarios.UseVisualStyleBackColor = true;
+            this.btnGestionarUsuarios.Click += new System.EventHandler(this.btnGestionarUsuarios_Click);
+            // 
             // MenuPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(786, 240);
+            this.ClientSize = new System.Drawing.Size(786, 210);
+            this.Controls.Add(this.btnGestionarUsuarios);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lbBateriaBaja);
             this.Controls.Add(this.btnRevisarLogs);
@@ -131,5 +143,6 @@
         private System.Windows.Forms.ListBox lbBateriaBaja;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Timer timer;
+        private System.Windows.Forms.Button btnGestionarUsuarios;
     }
 }

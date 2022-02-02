@@ -12,5 +12,9 @@ namespace ControlRiego
         public DateTime Fecha { get; set; }
         public string Tipo { get; set; }
         public string Info { get; set; }
+        public override string ToString()
+        {
+            return Info;
+        }
     }
 }

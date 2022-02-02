@@ -33,11 +33,11 @@ namespace ControlRiego
             IniciarSesion iniciarSesion = new IniciarSesion();
             if (iniciarSesion.ShowDialog() == DialogResult.OK)
             {
-                ConsolaSerial consolaSerial = new ConsolaSerial();
-                if (consolaSerial.ShowDialog() == DialogResult.OK)
+                //ConsolaSerial consolaSerial = new ConsolaSerial();
+                //if (consolaSerial.ShowDialog() == DialogResult.OK)
                 {
-                    if (iniciarSesion.Usuario.Tipo)
-                        consolaSerial.Show();
+                    //if (iniciarSesion.Usuario.Tipo)
+                        //consolaSerial.Show();
 
                     Application.Run(new MenuPrincipal(iniciarSesion.Usuario));
                 }

@@ -129,14 +129,16 @@ namespace ControlRiego
                 BaseDatos.BorrarPrograma(programa);
                 BaseDatos.CrearLog(new Log() { Tipo = "Crear Programa", Info = usuario.Nombre + " borró el programa para " + (programa.Accion ? "encender" : "apagar") + " el solenoide " + programa.ToString() });
             }
-
+            LlenarListasProgramas();
+        }
+        private void btnBorrarApagar_Click(object sender, EventArgs e)
+        {
             if (lbxApagar.SelectedIndex != -1)
             {
                 Programa programa = programasApagado[lbxApagar.SelectedIndex];
                 BaseDatos.BorrarPrograma(programa);
                 BaseDatos.CrearLog(new Log() { Tipo = "Crear Programa", Info = usuario.Nombre + " borró el programa para " + (programa.Accion ? "encender" : "apagar") + " el solenoide " + programa.ToString() });
             }
-
             LlenarListasProgramas();
         }
     }

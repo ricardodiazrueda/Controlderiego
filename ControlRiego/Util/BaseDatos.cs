@@ -81,6 +81,70 @@ namespace ControlRiego
                 return null;
             }
         }
+        static public List<Usuario> LeerTodosUsuarios()
+        {
+            try
+            {
+                List<Usuario> usuarios = new List<Usuario>();
+
+                using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+                {
+                    connection.Open();
+                    using (SQLiteCommand command = new SQLiteCommand(connection))
+                    {
+                        string query = "SELECT * FROM Usuarios";
+
+                        command.CommandText = query;
+                        using (SQLiteDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                Usuario usuario = new Usuario();
+                                usuario.UsuarioID = Convert.ToInt32(reader["UsuarioID"]);
+                                usuario.Nombre = Convert.ToString(reader["Nombre"]);
+                                usuario.NombreUsuario = Convert.ToString(reader["NombreUsuario"]);
+                                usuario.Tipo = Convert.ToBoolean(reader["Tipo"]);
+                                usuarios.Add(usuario);
+                            }
+                        }
+                    }
+                    connection.Close();
+                }
+
+                return usuarios;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        static public string ModificarUsuarioClave(Usuario usuario)
+        {
+            try
+            {
+                using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+                {
+                    connection.Open();
+                    using (SQLiteCommand command = new SQLiteCommand(connection))
+                    {
+                        usuario.Clave = Util.Hash(usuario.Clave);
+
+                        string query = "UPDATE Usuarios SET Clave = '{1}' WHERE UsuarioID = {0}";
+                        query = string.Format(query, usuario.UsuarioID, usuario.Clave);
+
+                        command.CommandText = query;
+                        command.ExecuteNonQuery();
+                    }
+                    connection.Close();
+                }
+
+                return "OK";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
 
         // Radios
         static public string CrearRadio()
@@ -123,10 +187,13 @@ namespace ControlRiego
                         command.CommandText = query;
                         using (SQLiteDataReader reader = command.ExecuteReader())
                         {
-                            Radio radio = new Radio();
-                            radio.RadioID = Convert.ToInt32(reader["RadioID"]);
-                            radio.BajoVoltaje = Convert.ToBoolean(reader["BajoVoltaje"]);
-                            radios.Add(radio);
+                            while (reader.Read())
+                            {
+                                Radio radio = new Radio();
+                                radio.RadioID = Convert.ToInt32(reader["RadioID"]);
+                                radio.BajoVoltaje = Convert.ToBoolean(reader["BajoVoltaje"]);
+                                radios.Add(radio);
+                            }
                         }
                     }
                     connection.Close();
@@ -635,6 +702,55 @@ namespace ControlRiego
             catch (Exception ex)
             {
                 return null;
+            }
+        }
+        static public string BorrarLog(Log log)
+        {
+            try
+            {
+                using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+                {
+                    connection.Open();
+                    using (SQLiteCommand command = new SQLiteCommand(connection))
+                    {
+                        string query = "DELETE FROM Logs WHERE LogID = {0}";
+                        query = string.Format(query, log.LogID);
+
+                        command.CommandText = query;
+                        command.ExecuteNonQuery();
+                    }
+                    connection.Close();
+                }
+
+                return "OK";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+        static public string BorrarLogsTodos(DateTime fecha)
+        {
+            try
+            {
+                using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+                {
+                    connection.Open();
+                    using (SQLiteCommand command = new SQLiteCommand(connection))
+                    {
+                        string query = "DELETE FROM Logs WHERE Fecha LIKE '" + fecha.ToString("yyyy/MM/dd") + "%'";
+
+                        command.CommandText = query;
+                        command.ExecuteNonQuery();
+                    }
+                    connection.Close();
+                }
+
+                return "OK";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
             }
         }
     }

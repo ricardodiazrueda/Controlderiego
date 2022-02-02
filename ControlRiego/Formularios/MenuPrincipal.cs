@@ -18,6 +18,7 @@ namespace ControlRiego
             InitializeComponent();
             this.usuario = usuario;
             lbBateriaBaja.DataSource = BaseDatos.LeerLogsBateriaBaja();
+            btnGestionarUsuarios.Visible = usuario.Tipo;
         }
 
         private void btnManual_Click(object sender, EventArgs e)
@@ -44,7 +45,7 @@ namespace ControlRiego
         private void btnRevisarLogs_Click(object sender, EventArgs e)
         {
             this.Visible = false;
-            (new RevisarLogs()).ShowDialog();
+            (new RevisarLogs(this.usuario)).ShowDialog();
             this.Visible = true;
         }
 
@@ -52,6 +53,12 @@ namespace ControlRiego
         {
             lbBateriaBaja.DataSource = null;
             lbBateriaBaja.DataSource = BaseDatos.LeerLogsBateriaBaja();
+        }
+        private void btnGestionarUsuarios_Click(object sender, EventArgs e)
+        {
+            this.Visible = false;
+            (new GestionarUsuarios()).ShowDialog();
+            this.Visible = true;
         }
     }
 }
