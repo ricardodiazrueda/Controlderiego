@@ -37,6 +37,7 @@
             // 
             // dtpFecha
             // 
+            this.dtpFecha.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.dtpFecha.Location = new System.Drawing.Point(544, 12);
             this.dtpFecha.Name = "dtpFecha";
             this.dtpFecha.Size = new System.Drawing.Size(269, 22);
@@ -45,6 +46,9 @@
             // 
             // dgvLogs
             // 
+            this.dgvLogs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvLogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvLogs.Location = new System.Drawing.Point(12, 40);
             this.dgvLogs.Name = "dgvLogs";
@@ -86,7 +90,7 @@
             this.Controls.Add(this.btnBorrarTodo);
             this.Controls.Add(this.dgvLogs);
             this.Controls.Add(this.dtpFecha);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Name = "RevisarLogs";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "RevisarLogs";

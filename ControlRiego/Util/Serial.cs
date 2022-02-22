@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO.Ports;
+using System.IO;
 
 namespace ControlRiego
 {
@@ -11,6 +12,7 @@ namespace ControlRiego
     public static class Serial
     {
         static SerialPort serialPort = null;
+        public static SerialCallback defaultCallback { get; set; } = (radio, solenoide, accion) => { };
         public static SerialCallback callback { get; set; } = (radio, solenoide, accion) => { };
         public static bool Open(string portName)
         {
@@ -25,12 +27,20 @@ namespace ControlRiego
                 serialPort.ReadBufferSize = 2000000;
                 serialPort.DataReceived += Receive;
                 serialPort.Open();
-                Console.WriteLine("Connected to " + portName);
+                using (StreamWriter sw = File.AppendText("console.log"))
+                {
+                    Console.WriteLine("Connected to " + portName);
+                    sw.WriteLine("Connected to " + portName);
+                }
                 return true;
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.ToString());
+                using (StreamWriter sw = File.AppendText("console.log"))
+                {
+                    Console.WriteLine(ex.ToString());
+                    sw.WriteLine(ex.ToString());
+                }
                 return false;
             }
         }
@@ -39,12 +49,20 @@ namespace ControlRiego
             try
             {
                 serialPort.Close();
-                Console.WriteLine("Disconnected from " + serialPort.PortName);
+                using (StreamWriter sw = File.AppendText("console.log"))
+                {
+                    Console.WriteLine("Disconnected from " + serialPort.PortName);
+                    sw.WriteLine("Disconnected from " + serialPort.PortName);
+                }
                 return true;
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.ToString());
+                using (StreamWriter sw = File.AppendText("console.log"))
+                {
+                    Console.WriteLine(ex.ToString());
+                    sw.WriteLine(ex.ToString());
+                }
                 return false;
             }
         }
@@ -59,15 +77,30 @@ namespace ControlRiego
             string time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             try
             {
-                Console.WriteLine(time + " Sending: " + data);
+                using (StreamWriter sw = File.AppendText("console.log"))
+                {
+                    Console.WriteLine(time + " Sending: " + data);
+                    sw.WriteLine(time + " Sending: " + data);
+                }
+
                 if (serialPort == null)
                     throw new Exception("Serial not initialized");
+
                 serialPort.WriteLine(data);
-                Console.WriteLine(time + " Sent: " + data);
+
+                using (StreamWriter sw = File.AppendText("console.log"))
+                {
+                    Console.WriteLine(time + " Sent: " + data);
+                    sw.WriteLine(time + " Sent: " + data);
+                }
             }
             catch (Exception ex)
             {
-                Console.WriteLine(time + " " + ex.ToString());
+                using (StreamWriter sw = File.AppendText("console.log"))
+                {
+                    Console.WriteLine(time + " " + ex.ToString());
+                    sw.WriteLine(time + " " + ex.ToString());
+                }
             }
         }
         private static void Receive(object sender, SerialDataReceivedEventArgs e)
@@ -77,7 +110,11 @@ namespace ControlRiego
             {
                 string data = serialPort.ReadLine();
                 data = data.Substring(0, data.Length - 1);
-                Console.WriteLine(time + " Received (" + data.Length + "): '" + data + "'");
+                using (StreamWriter sw = File.AppendText("console.log"))
+                {
+                    Console.WriteLine(time + " Received (" + data.Length + "): '" + data + "'");
+                    sw.WriteLine(time + " Received (" + data.Length + "): '" + data + "'");
+                }
 
                 if (data.Length == 5)
                 {
@@ -93,7 +130,11 @@ namespace ControlRiego
             }
             catch(Exception ex)
             {
-                Console.WriteLine(time + " " + ex.ToString());
+                using (StreamWriter sw = File.AppendText("console.log"))
+                {
+                    Console.WriteLine(time + " " + ex.ToString());
+                    sw.WriteLine(time + " " + ex.ToString());
+                }
             }
         }
     }

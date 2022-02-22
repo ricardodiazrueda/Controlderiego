@@ -40,7 +40,7 @@ namespace ControlRiego
                     {
                         programasEnviados.Remove(programa);
                         programasEjecutados.Add(programa);
-                        BaseDatos.CrearLog(new Log() { Tipo = "Monitorear Programa", Info = "¡Correcto! - Pograma para " + (programa.Accion ? "encender" : "apagar") + " el solenoide " + programa.ToString() });
+                        BaseDatos.CrearLog(new Log() { Tipo = "Monitorear Programa", Info = "¡Correcto! - Programa para " + (programa.Accion ? "encender" : "apagar") + " el solenoide " + programa.ToString() });
                     }
                 }
             };
@@ -162,12 +162,13 @@ namespace ControlRiego
 
                         programasEnviados.Remove(tarde);
                         programasReprogramados.Add(reprogramado);
+                        BaseDatos.CrearLog(new Log() { Tipo = "Monitorear Programa", Info = "¡Reprogramado! - Programa para " + (reprogramado.Original.Accion ? "encender" : "apagar") + " el solenoide " + tarde.Original.ToString() + " cambio para las " + reprogramado.ToString() });
                     }
                     else
                     {
                         programasEnviados.Remove(tarde);
                         programasFallados.Add(tarde.Original);
-                        BaseDatos.CrearLog(new Log() { Tipo = "Monitorear Programa", Info = "¡Fallado! - Pograma para " + (tarde.Original.Accion ? "encender" : "apagar") + " el solenoide " + tarde.Original.ToString() });
+                        BaseDatos.CrearLog(new Log() { Tipo = "Monitorear Programa", Info = "¡Fallado! - Programa para " + (tarde.Original.Accion ? "encender" : "apagar") + " el solenoide " + tarde.Original.ToString() });
                     }
                 }
             }
@@ -176,6 +177,12 @@ namespace ControlRiego
         {
             lblHora.Text = "Dia, fecha y hora: " + DateTime.Now.ToString("dddd, dd/MM/yyyy HH:mm:ss");
             LlenarListasProgramas();
+        }
+
+        private void MonitorearHorarios_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            reloj.Enabled = false;
+            marcapasos.Enabled = false;
         }
     }
 }

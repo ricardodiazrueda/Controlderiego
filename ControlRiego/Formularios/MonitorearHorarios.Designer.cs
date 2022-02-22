@@ -173,6 +173,7 @@
             this.Controls.Add(this.lblHora);
             this.Name = "MonitorearHorarios";
             this.Text = "Monitorear Programas";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MonitorearHorarios_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 

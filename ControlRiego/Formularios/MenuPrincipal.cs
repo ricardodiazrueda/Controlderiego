@@ -24,29 +24,41 @@ namespace ControlRiego
         private void btnManual_Click(object sender, EventArgs e)
         {
             this.Visible = false;
-            (new ControlManual(this.usuario)).ShowDialog();
+            ControlManual frm = new ControlManual(this.usuario);
+            frm.ShowDialog();
+            frm.Dispose();
             this.Visible = true;
+            Serial.callback = Serial.defaultCallback;
         }
 
         private void btnProgramar_Click(object sender, EventArgs e)
         {
             this.Visible = false;
-            (new ProgramarHorarios(this.usuario)).ShowDialog();
+            ProgramarHorarios frm = new ProgramarHorarios(this.usuario);
+            frm.ShowDialog();
+            frm.Dispose();
             this.Visible = true;
+            Serial.callback = Serial.defaultCallback;
         }
 
         private void btnMonitorear_Click(object sender, EventArgs e)
         {
             this.Visible = false;
-            (new MonitorearHorarios(this.usuario)).ShowDialog();
+            MonitorearHorarios frm = new MonitorearHorarios(this.usuario);
+            frm.ShowDialog();
+            frm.Dispose();
             this.Visible = true;
+            Serial.callback = Serial.defaultCallback;
         }
 
         private void btnRevisarLogs_Click(object sender, EventArgs e)
         {
             this.Visible = false;
-            (new RevisarLogs(this.usuario)).ShowDialog();
+            RevisarLogs frm = new RevisarLogs(this.usuario);
+            frm.ShowDialog();
+            frm.Dispose();
             this.Visible = true;
+            Serial.callback = Serial.defaultCallback;
         }
 
         private void timer_Tick(object sender, EventArgs e)
@@ -57,8 +69,11 @@ namespace ControlRiego
         private void btnGestionarUsuarios_Click(object sender, EventArgs e)
         {
             this.Visible = false;
-            (new GestionarUsuarios()).ShowDialog();
+            GestionarUsuarios frm = new GestionarUsuarios();
+            frm.ShowDialog();
+            frm.Dispose();
             this.Visible = true;
+            Serial.callback = Serial.defaultCallback;
         }
     }
 }
